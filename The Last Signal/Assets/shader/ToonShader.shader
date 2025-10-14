@@ -1,4 +1,4 @@
-﻿Shader "ToonShader"
+Shader "ToonShader"
 {
     Properties
     {
