@@ -1,4 +1,4 @@
-Shader "PipBoyScreen"
+Shader "UI/RetroScreen"
 {
     Properties
     {
@@ -8,7 +8,7 @@ Shader "PipBoyScreen"
         _FlickerSpeed ("Flicker Speed", Range(0, 10)) = 3
         _FlickerIntensity ("Flicker Intensity", Range(0, 1)) = 0.3
         _GlowIntensity ("Glow Intensity", Range(0, 5)) = 2
-        _Alpha ("Alpha", Range(0, 1)) = 1
+        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
     }
 
     SubShader
@@ -16,19 +16,22 @@ Shader "PipBoyScreen"
         Tags 
         { 
             "Queue"="Transparent"
+            "IgnoreProjector"="True"
             "RenderType"="Transparent"
-            "RenderPipeline"="UniversalPipeline"
+            "PreviewType"="Plane"
+            "CanUseSpriteAtlas"="True"
         }
 
-        Blend SrcAlpha OneMinusSrcAlpha
-        ZWrite Off
         Cull Off
+        Lighting Off
+        ZWrite Off
+        ZTest [unity_GUIZTestMode]
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
-            Name "PipBoyPass"
-            Tags { "LightMode"="UniversalForward" }
-
+            Name "PipBoyUI"
+            
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -39,13 +42,18 @@ Shader "PipBoyScreen"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                half4 color : COLOR;
             };
 
             struct v2f
             {
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                half4 color : COLOR;
             };
+
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
 
             float4 _HoloColor;
             float _ScanSpeed;
@@ -53,42 +61,54 @@ Shader "PipBoyScreen"
             float _FlickerSpeed;
             float _FlickerIntensity;
             float _GlowIntensity;
-            float _Alpha;
+            half4 _TextureSampleAdd;
 
-            // Ruido mínimo (para parpadeo leve)
-            float rand(float2 n)
+            // Función de ruido optimizada
+            float simple_noise(float2 uv)
             {
-                return frac(sin(dot(n, float2(12.9898, 78.233))) * 43758.5453);
+                return frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453);
             }
 
-            v2f vert (appdata v)
+            v2f vert(appdata v)
             {
                 v2f o;
                 o.pos = TransformObjectToHClip(v.vertex.xyz);
                 o.uv = v.uv;
+                o.color = v.color;
                 return o;
             }
 
-            half4 frag (v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
-                // Líneas de escaneo verticales (bajando)
-                float scan = sin((i.uv.y + _Time.y * _ScanSpeed) * _ScanDensity) * 0.5 + 0.5;
+                // Muestreo de textura base (para compatibilidad con UI Image)
+                half4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv) + _TextureSampleAdd;
+                
+                // Escaneo con tamaño constante en pantalla
+float2 screenUV = i.pos.xy / _ScreenParams.xy; // Coordenadas normalizadas de pantalla
+float scanTime = _Time.y * _ScanSpeed;
+float scan = frac(screenUV.y * _ScanDensity + scanTime);
+scan = 1.0 - abs(scan * 2.0 - 1.0); // Onda triangular
+scan = pow(scan, 2.0); // Suavizado del brillo de línea
 
-                // Parpadeo global
-                float flicker = sin(_Time.y * _FlickerSpeed) * 0.5 + 0.5;
+
+                // Parpadeo optimizado (sin funciones trigonométricas costosas)
+                float flickerTime = _Time.y * _FlickerSpeed;
+                float flicker = frac(flickerTime) * 2.0 - 1.0;
+                flicker = 1.0 - flicker * flicker; // Parábola en lugar de seno
                 flicker = lerp(1.0, flicker, _FlickerIntensity);
 
-                // Color holográfico
-                float3 color = _HoloColor.rgb * scan * flicker * _GlowIntensity;
+                // Color final combinado con la textura original
+                half3 glowColor = _HoloColor.rgb * _GlowIntensity;
+                half3 finalColor = texColor.rgb * glowColor * scan * flicker;
+                
+                // Alpha que respeta la textura original y el color del vértice
+                half alpha = texColor.a * _HoloColor.a * i.color.a;
 
-                // Alpha con leve modulación por flicker
-                float alpha = _Alpha * (0.8 + flicker * 0.2);
-
-                return half4(color, alpha);
+                return half4(finalColor * i.color.rgb, alpha);
             }
             ENDHLSL
         }
     }
 
-    FallBack "Universal Render Pipeline/Unlit"
+    FallBack "Universal Render Pipeline/2D/Sprite-Unlit-Default"
 }

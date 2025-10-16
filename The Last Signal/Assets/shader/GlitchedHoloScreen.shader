@@ -1,114 +1,132 @@
-Shader "Digital/GlitchedHoloScreen"
+Shader "UI/RetroGlitchedScreen"
 {
     Properties
     {
-        _BaseMap("Base Texture", 2D) = "white" {}
+        [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
         _HoloColor ("Screen Tint", Color) = (0.2, 1, 0.3, 1)
         _ScanSpeed ("Scan Speed", Range(0, 10)) = 2
         _ScanDensity ("Scan Density", Range(10, 1000)) = 300
         _GlowIntensity ("Glow Intensity", Range(0, 5)) = 2
-        _GlitchIntensity ("Glitch Intensity", Range(0, 1)) = 0.2
-        _GlitchSpeed ("Glitch Speed", Range(0, 10)) = 4
-        _Alpha ("Alpha", Range(0, 1)) = 1
+        _GlitchSpeed ("Glitch Speed", Range(0, 10)) = 3
+        _GlitchThickness ("Glitch Thickness", Range(0, 0.2)) = 0.02
+        _GlitchIntensity ("Glitch Offset", Range(0, 0.1)) = 0.03
+
     }
 
     SubShader
     {
         Tags 
-        { 
+        {
             "Queue"="Transparent"
+            "IgnoreProjector"="True"
             "RenderType"="Transparent"
-            "RenderPipeline"="UniversalPipeline"
+            "PreviewType"="Plane"
+            "CanUseSpriteAtlas"="True"
         }
 
-        Blend SrcAlpha OneMinusSrcAlpha
-        ZWrite Off
+    
+
         Cull Off
+        Lighting Off
+        ZWrite Off
+        ZTest [unity_GUIZTestMode]
+        Blend SrcAlpha OneMinusSrcAlpha
+  
 
         Pass
         {
-            Name "GlitchedPass"
-            Tags { "LightMode"="UniversalForward" }
-
-            HLSLPROGRAM
+            Name "Default"
+            CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #pragma target 2.0
 
-            struct Attributes
+            #include "UnityCG.cginc"
+            #include "UnityUI.cginc"
+
+            #pragma multi_compile __ UNITY_UI_CLIP_RECT
+            #pragma multi_compile __ UNITY_UI_ALPHACLIP
+
+            struct appdata_t
             {
-                float4 positionOS : POSITION;
-                float2 uv : TEXCOORD0;
+                float4 vertex   : POSITION;
+                float4 color    : COLOR;
+                float2 texcoord : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
-            struct Varyings
+            struct v2f
             {
-                float4 positionCS : SV_POSITION;
-                float2 uv : TEXCOORD0;
+                float4 vertex   : SV_POSITION;
+                fixed4 color    : COLOR;
+                float2 texcoord  : TEXCOORD0;
+                float4 worldPosition : TEXCOORD1;
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
-
-            float4 _HoloColor;
+            sampler2D _MainTex;
+            fixed4 _HoloColor;
             float _ScanSpeed;
             float _ScanDensity;
             float _GlowIntensity;
-            float _GlitchIntensity;
             float _GlitchSpeed;
-            float _Alpha;
-            float4 _BaseMap_ST; // para TRANSFORM_TEX
+            float _GlitchThickness;
+            float _GlitchIntensity;
+            fixed4 _TextureSampleAdd;
+            float4 _ClipRect;
+            float4 _MainTex_ST;
 
-            // Pseudo-aleatorio (estático, determinista)
-            float rand(float2 n)
+            v2f vert(appdata_t v)
             {
-                return frac(sin(dot(n, float2(12.9898,78.233))) * 43758.5453);
+                v2f OUT;
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
+                OUT.worldPosition = v.vertex;
+                OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
+                OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+                OUT.color = v.color * _HoloColor;
+                return OUT;
             }
 
-            Varyings vert(Attributes v)
-            {
-                Varyings o;
-                o.positionCS = TransformObjectToHClip(v.positionOS.xyz);
-                o.uv = TRANSFORM_TEX(v.uv, _BaseMap);
-                return o;
-            }
+            fixed4 frag(v2f IN) : SV_Target
+{
+    // --- Tiempo y glitch ---
+    float t = frac(_Time.y * _GlitchSpeed);
 
-            half4 frag(Varyings i) : SV_Target
-            {
-                float t = _Time.y * _GlitchSpeed;
+    // --- Coordenadas de pantalla normalizadas ---
+    float2 screenUV = IN.vertex.xy / _ScreenParams.xy;
 
-                // Escaneo vertical (estética holográfica)
-                float scan = sin((i.uv.y + _Time.y * _ScanSpeed) * _ScanDensity) * 0.5 + 0.5;
+    // --- Escaneo con tamaño constante ---
+    float scanTime = _Time.y * _ScanSpeed;
+    float scan = frac(screenUV.y * _ScanDensity + scanTime);
+    scan = 1.0 - abs(scan * 2.0 - 1.0);   // Onda triangular
+    scan = pow(scan, 2.0);                // Suavizado del brillo
 
-                // Máscara de glitch por líneas (discreto)
-                float lineNoise = rand(float2(floor(i.uv.y * 200.0), floor(t)));
-                float glitchLine = step(0.98, lineNoise); // pocas líneas afectadas
+    // --- Línea de glitch ---
+    float linePos = t;
+    float dist = abs(screenUV.y - linePos);
+    float glitchLine = smoothstep(_GlitchThickness, 0.0, dist);
 
-                // Desplazamientos UV causados por glitch
-                float horizShift = (rand(float2(floor(t * 10.0), i.uv.y * 100.0)) - 0.5) * _GlitchIntensity * glitchLine * 0.1;
-                float vertJitter = (rand(i.uv * 100.0 + floor(t))) - 0.5;
-                vertJitter *= _GlitchIntensity * 0.02;
+    // --- Desplazamiento UV para glitch ---
+    float2 glitchUV = IN.texcoord;
+    glitchUV.x += glitchLine * _GlitchIntensity * sin(_Time.y * 30.0);
 
-                float2 glitchUV = i.uv;
-                glitchUV.x += horizShift;
-                glitchUV.y += vertJitter;
+    // --- Textura base y color holográfico ---
+    half4 color = (tex2D(_MainTex, glitchUV) + _TextureSampleAdd) * IN.color;
+    color.rgb *= (0.6 + scan * 0.4) * _GlowIntensity;
 
-                // Muestreo seguro de la textura
-                float4 tex = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, glitchUV);
+    #ifdef UNITY_UI_CLIP_RECT
+    color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
+    #endif
 
-                // Aplicar color holográfico + escaneo + brillo
-                float3 color = tex.rgb * _HoloColor.rgb * (0.5 + scan * 0.5) * _GlowIntensity;
+    #ifdef UNITY_UI_ALPHACLIP
+    clip(color.a - 0.001);
+    #endif
 
-                // alpha principal tomado de la textura y control global
-                float alpha = tex.a * _Alpha;
+    return color;
+}
 
-                // Retorno final (clamped)
-                return half4(saturate(color), saturate(alpha));
-            }
-
-            ENDHLSL
+            ENDCG
         }
     }
-
-    FallBack "Universal Render Pipeline/Unlit"
 }
