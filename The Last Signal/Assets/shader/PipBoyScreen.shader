@@ -7,11 +7,12 @@ Shader "UI/RetroScreen"
         _ScanSpeed ("Scan Speed", Range(0, 10)) = 2
         _ScanDensity ("Scan Density", Range(10, 1000)) = 300
         _GlowIntensity ("Glow Intensity", Range(0, 5)) = 2
+        _FlickerIntensity ("Flicker Intensity", Range(0, 1)) = 0.2
     }
 
     SubShader
     {
-        Tags 
+        Tags
         {
             "Queue"="Transparent"
             "IgnoreProjector"="True"
@@ -62,9 +63,16 @@ Shader "UI/RetroScreen"
             float _ScanSpeed;
             float _ScanDensity;
             float _GlowIntensity;
+            float _FlickerIntensity;
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
             float4 _MainTex_ST;
+
+            // --- FunciÃ³n hash simple para flicker pseudoaleatorio
+            float hash(float n)
+            {
+                return frac(sin(n) * 43758.5453);
+            }
 
             v2f vert(appdata_t v)
             {
@@ -81,20 +89,22 @@ Shader "UI/RetroScreen"
             fixed4 frag(v2f IN) : SV_Target
             {
                 float2 uv = IN.texcoord;
-                
-                // Solo un muestreo de textura sin distorsiones
                 half4 finalColor = tex2D(_MainTex, uv);
                 finalColor = (finalColor + _TextureSampleAdd) * IN.color;
-                
-                // Líneas de escaneo optimizadas
+
+                // --- LÃ­neas de escaneo
                 float2 screenUV = IN.vertex.xy / _ScreenParams.xy;
                 float scan = frac(screenUV.y * _ScanDensity + _Time.y * _ScanSpeed);
                 scan = 1.0 - abs(scan * 2.0 - 1.0);
-                scan = scan * scan; // Más rápido que pow(scan, 2.0)
-                
-                // Aplicar efectos de brillo con líneas de escaneo
+                scan = scan * scan;
                 float scanMultiplier = 0.7 + scan * 0.3;
-                finalColor.rgb *= scanMultiplier * _GlowIntensity;
+
+                // --- Flicker pseudoaleatorio basado en tiempo
+                float flicker = hash(floor(_Time.y * 60.0)); // cambia ~60 veces por segundo
+                float flickerFactor = 1.0 + (flicker - 0.5) * 2.0 * _FlickerIntensity;
+
+                // --- Aplicar brillo total
+                finalColor.rgb *= scanMultiplier * _GlowIntensity * flickerFactor;
 
                 #ifdef UNITY_UI_CLIP_RECT
                 finalColor.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);

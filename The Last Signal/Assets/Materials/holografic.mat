@@ -116,10 +116,11 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Distortion: 0.01
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _EnvironmentReflections: 1
-    - _FlickerIntensity: 0.5
+    - _FlickerIntensity: 0.15
     - _FlickerSpeed: 4
     - _GlitchIntensity: 0.1
     - _GlitchSpeed: 1

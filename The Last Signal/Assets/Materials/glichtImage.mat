@@ -103,6 +103,7 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _BlockSize: 0.033
     - _BumpScale: 1
+    - _CRTCurve: 0.6
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorMask: 15
@@ -114,7 +115,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _FlickerIntensity: 0.587
-    - _FlickerSpeed: 0.5
+    - _FlickerSpeed: 20
     - _GlitchIntensity: 0.0756
     - _GlitchLevel: 0
     - _GlitchSpeed: 10
@@ -122,7 +123,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GlowIntensity: 3.8
+    - _GlowIntensity: 5
     - _JitterAmount: 0.0075
     - _Metallic: 0
     - _NoiseIntensity: 0.0313
@@ -151,7 +152,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HoloColor: {r: 0.427451, g: 1, b: 0.6294888, a: 1}
+    - _HoloColor: {r: 0.514151, g: 1, b: 0.6871931, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

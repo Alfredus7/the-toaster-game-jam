@@ -4,19 +4,19 @@ Shader "UI/RetroGlitchedScreen"
     {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
         _HoloColor ("Screen Tint", Color) = (0.2, 1, 0.3, 1)
-        _ScanSpeed ("Scan Speed", Range(0, 10)) = 2
-        _ScanDensity ("Scan Density", Range(10, 1000)) = 300
-        _GlowIntensity ("Glow Intensity", Range(0, 5)) = 2
-        _GlitchLevel ("Glitch Level", Range(0, 1)) = 1.0
+        _ScanSpeed ("Scan Speed", Range(0,10)) = 2 
+        _ScanDensity ("Scan Density", Range(10,1000)) = 300
+        _GlowIntensity ("Glow Intensity", Range(0,5)) = 2
+        _GlitchLevel ("Glitch Level (0-5)", Range(0,5)) = 0
     }
 
     SubShader
     {
-        Tags 
+        Tags
         {
             "Queue"="Transparent"
-            "IgnoreProjector"="True"
             "RenderType"="Transparent"
+            "IgnoreProjector"="True"
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
         }
@@ -29,12 +29,10 @@ Shader "UI/RetroGlitchedScreen"
 
         Pass
         {
-            Name "Default"
+            Name "RetroGlitch"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma target 2.0
-
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
 
@@ -43,16 +41,16 @@ Shader "UI/RetroGlitchedScreen"
 
             struct appdata_t
             {
-                float4 vertex   : POSITION;
-                float4 color    : COLOR;
+                float4 vertex : POSITION;
+                float4 color  : COLOR;
                 float2 texcoord : TEXCOORD0;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
             {
-                float4 vertex   : SV_POSITION;
-                fixed4 color    : COLOR;
+                float4 vertex : SV_POSITION;
+                fixed4 color  : COLOR;
                 float2 texcoord : TEXCOORD0;
                 float4 worldPosition : TEXCOORD1;
                 UNITY_VERTEX_OUTPUT_STEREO
@@ -60,97 +58,91 @@ Shader "UI/RetroGlitchedScreen"
 
             sampler2D _MainTex;
             fixed4 _HoloColor;
+            float _GlitchLevel;
             float _ScanSpeed;
             float _ScanDensity;
             float _GlowIntensity;
-            float _GlitchLevel;
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
             float4 _MainTex_ST;
 
-            // Función de ruido optimizada - menos operaciones trigonométricas
-            float fast_rand(float2 co) {
-                return frac(sin(dot(co, float2(12.9898, 78.233))) * 43758.5453);
+            float fast_rand(float2 co)
+            {
+                return frac(sin(dot(co, float2(12.9898,78.233))) * 43758.5453);
             }
 
             v2f vert(appdata_t v)
             {
-                v2f OUT;
+                v2f o;
                 UNITY_SETUP_INSTANCE_ID(v);
-                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
-                OUT.worldPosition = v.vertex;
-                
-                // Jitter solo aplicado si hay glitch significativo
-                float jitter = (fast_rand(float2(_Time.y, _Time.y)) * 2.0 - 1.0) * 0.02 * _GlitchLevel;
-                OUT.worldPosition.xy += jitter * step(0.1, _GlitchLevel); // step es más rápido que if
-                
-                OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
-                OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
-                OUT.color = v.color * _HoloColor;
-                return OUT;
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+                o.worldPosition = v.vertex;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+                o.color = v.color * _HoloColor;
+                return o;
             }
 
             fixed4 frag(v2f IN) : SV_Target
             {
                 float2 uv = IN.texcoord;
                 float t = _Time.y * 3.0;
-                
-                // Pre-calcular intensidades (evita cálculos repetidos)
-                float glitchIntensity = _GlitchLevel * 0.1;
-                float noiseIntensity = _GlitchLevel * 0.03;
-                float blockSize = lerp(0.2, 0.05, _GlitchLevel);
-                
-                // Calcular todo el ruido de una vez
+
+                // --- Escala de glitch por nivel ---
+                float glitchStrength = saturate(_GlitchLevel / 5.0);
+                float blockIntensity = pow(glitchStrength, 1.3);
+                float noiseIntensity = glitchStrength * 0.05;
+                float flickerAmp     = glitchStrength * 0.05;
+                float waveAmp        = glitchStrength * 0.004;
+
+                // --- Curva CRT leve ---
+                float2 centered = uv - 0.5;
+                uv += centered * dot(centered, centered) * 0.15 * glitchStrength;
+
+                // --- Distorsión horizontal (ondas CRT) ---
+                uv.x += sin(uv.y * 100.0 + _Time.y * 5.0) * waveAmp;
+
+                // --- Glitch tipo bloque ---
+                float blockSize = lerp(0.25, 0.05, glitchStrength);
                 float2 blockUV = floor(uv / blockSize) * blockSize;
                 float blockNoise = fast_rand(blockUV + t);
-                float staticNoise = fast_rand(uv + _Time.xx);
-                
-                // Aplicar distorsiones sin condicionales usando step y lerp
-                float2 glitchUV = uv;
-                
-                // Distorsión de bloques - reemplaza if statements
-                float blockDistortX = step(0.7, blockNoise) * (blockNoise - 0.7) * glitchIntensity * 3.0;
-                float blockDistortY = step(0.0, 0.3 - blockNoise) * (0.3 - blockNoise) * glitchIntensity * 2.0;
-                glitchUV.x += blockDistortX * step(0.3, _GlitchLevel);
-                glitchUV.y += blockDistortY * step(0.3, _GlitchLevel);
-                
-                // Ruido estático
-                glitchUV.xy += (staticNoise - 0.5) * noiseIntensity;
-                
-                // SOLO UN MUESTREO DE TEXTURA
-                half4 finalColor = tex2D(_MainTex, glitchUV);
-                finalColor = (finalColor + _TextureSampleAdd) * IN.color;
-                
-                // Líneas de escaneo optimizadas
+                uv.x += (blockNoise - 0.5) * 0.1 * blockIntensity * step(0.7, blockNoise);
+
+                // --- Ruido estático fino ---
+                float staticNoise = fast_rand(uv * 500.0 + _Time.yy);
+                uv.xy += (staticNoise - 0.5) * noiseIntensity;
+
+                // --- Muestra textura ---
+                fixed4 col = tex2D(_MainTex, uv);
+                col = (col + _TextureSampleAdd) * IN.color;
+
+                // --- Líneas de escaneo ---
                 float2 screenUV = IN.vertex.xy / _ScreenParams.xy;
                 float scan = frac(screenUV.y * _ScanDensity + _Time.y * _ScanSpeed);
                 scan = 1.0 - abs(scan * 2.0 - 1.0);
-                scan = scan * scan; // Más rápido que pow(scan, 2.0)
-                
-                // Aplicar efectos de brillo
-                float scanMultiplier = 0.7 + scan * 0.3 + _GlitchLevel * 0.2;
-                finalColor.rgb *= scanMultiplier * _GlowIntensity;
-                
-                // Ruido estático optimizado
-                float noiseEffect = step(0.8, staticNoise) * step(0.2, _GlitchLevel);
-                finalColor.rgb += staticNoise * 0.1 * _GlitchLevel * noiseEffect;
-                
-                // Líneas de glitch optimizadas
-                float glitchLine = frac(t * 2.0);
-                float lineIntensity = 1.0 - smoothstep(0.0, 0.02, abs(uv.y - glitchLine));
-                float lineEffect = step(0.1, lineIntensity) * step(0.5, _GlitchLevel);
-                float lineNoise = fast_rand(float2(uv.x * 10.0, t));
-                finalColor.rgb = lerp(finalColor.rgb, finalColor.rgb * (0.5 + lineNoise * 0.5), 0.3 * _GlitchLevel * lineEffect);
+                scan *= scan;
+                float scanMul = 0.7 + scan * 0.3;
+
+                // --- Flicker global ---
+                float flicker = 1.0 + sin(_Time.y * (3.0 + glitchStrength * 10.0)) * flickerAmp;
+
+                // --- Aplicar intensidades ---
+                col.rgb *= scanMul * _GlowIntensity * flicker;
+                col.g += glitchStrength * 0.05; // brillo fósforo
+
+                // --- Líneas de glitch ---
+                float lineY = frac(t * (1.5 + glitchStrength * 3.0));
+                float glitchLine = smoothstep(0.0, 0.02, abs(uv.y - lineY));
+                col.rgb *= 1.0 - glitchLine * 0.4 * glitchStrength;
 
                 #ifdef UNITY_UI_CLIP_RECT
-                finalColor.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
+                col.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
                 #endif
-
                 #ifdef UNITY_UI_ALPHACLIP
-                clip(finalColor.a - 0.001);
+                clip(col.a - 0.001);
                 #endif
 
-                return finalColor;
+                return col;
             }
             ENDCG
         }
