@@ -8,6 +8,9 @@ Shader "UI/RetroScreen"
         _FlickerSpeed ("Flicker Speed", Range(0, 10)) = 3
         _FlickerIntensity ("Flicker Intensity", Range(0, 1)) = 0.3
         _GlowIntensity ("Glow Intensity", Range(0, 5)) = 2
+        _GlitchIntensity ("Glitch Intensity", Range(0, 1)) = 0.1
+        _GlitchSpeed ("Glitch Speed", Range(0, 5)) = 1
+        _NoiseIntensity ("Noise Intensity", Range(0, 0.1)) = 0.02
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
     }
 
@@ -61,12 +64,31 @@ Shader "UI/RetroScreen"
             float _FlickerSpeed;
             float _FlickerIntensity;
             float _GlowIntensity;
+            float _GlitchIntensity;
+            float _GlitchSpeed;
+            float _NoiseIntensity;
             half4 _TextureSampleAdd;
 
-            // Función de ruido optimizada
-            float simple_noise(float2 uv)
+            // Función de ruido rápido y optimizado
+            float fast_rand(float2 co)
             {
-                return frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453);
+                return frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453);
+            }
+
+            // Ruido más suave usando interpolación
+            float smooth_noise(float2 uv)
+            {
+                float2 i = floor(uv);
+                float2 f = frac(uv);
+                
+                float a = fast_rand(i);
+                float b = fast_rand(i + float2(1.0, 0.0));
+                float c = fast_rand(i + float2(0.0, 1.0));
+                float d = fast_rand(i + float2(1.0, 1.0));
+                
+                float2 u = f * f * (3.0 - 2.0 * f);
+                
+                return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y);
             }
 
             v2f vert(appdata v)
@@ -80,28 +102,47 @@ Shader "UI/RetroScreen"
 
             half4 frag(v2f i) : SV_Target
             {
-                // Muestreo de textura base (para compatibilidad con UI Image)
-                half4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv) + _TextureSampleAdd;
+                // Coordenadas de pantalla para efectos constantes
+                float2 screenUV = i.pos.xy / _ScreenParams.xy;
                 
-                // Escaneo con tamaño constante en pantalla
-float2 screenUV = i.pos.xy / _ScreenParams.xy; // Coordenadas normalizadas de pantalla
-float scanTime = _Time.y * _ScanSpeed;
-float scan = frac(screenUV.y * _ScanDensity + scanTime);
-scan = 1.0 - abs(scan * 2.0 - 1.0); // Onda triangular
-scan = pow(scan, 2.0); // Suavizado del brillo de línea
+                // Efecto de escaneo optimizado
+                float scanTime = _Time.y * _ScanSpeed;
+                float scan = frac(screenUV.y * _ScanDensity + scanTime);
+                scan = 1.0 - abs(scan * 2.0 - 1.0);
+                scan = pow(scan, 2.0);
 
-
-                // Parpadeo optimizado (sin funciones trigonométricas costosas)
+                // Parpadeo optimizado
                 float flickerTime = _Time.y * _FlickerSpeed;
                 float flicker = frac(flickerTime) * 2.0 - 1.0;
-                flicker = 1.0 - flicker * flicker; // Parábola en lugar de seno
+                flicker = 1.0 - flicker * flicker;
                 flicker = lerp(1.0, flicker, _FlickerIntensity);
 
-                // Color final combinado con la textura original
+                // Efectos glitch más elaborados pero optimizados
+                float glitchTime = _Time.y * _GlitchSpeed;
+                
+                // Glitch horizontal (desplazamiento de líneas)
+                float lineGlitch = fast_rand(float2(floor(screenUV.y * 50.0 + glitchTime), glitchTime)) - 0.5;
+                float2 glitchedUV = i.uv + float2(lineGlitch * _GlitchIntensity * 0.1, 0);
+                
+                // Glitch vertical intermitente
+                float verticalGlitch = step(0.98, fast_rand(float2(glitchTime, 0)));
+                glitchedUV.y += verticalGlitch * (fast_rand(float2(glitchTime, 1.0)) - 0.5) * _GlitchIntensity * 0.05;
+                
+                // Ruido estático sutil
+                float staticNoise = fast_rand(screenUV * 100.0 + glitchTime);
+                staticNoise = staticNoise * 2.0 - 1.0;
+                
+                // Muestreo de textura con efectos glitch aplicados
+                half4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, glitchedUV) + _TextureSampleAdd;
+                
+                // Aplicar ruido estático al color
+                texColor.rgb += staticNoise * _NoiseIntensity;
+
+                // Color final con todos los efectos
                 half3 glowColor = _HoloColor.rgb * _GlowIntensity;
                 half3 finalColor = texColor.rgb * glowColor * scan * flicker;
                 
-                // Alpha que respeta la textura original y el color del vértice
+                // Alpha que respeta la textura original
                 half alpha = texColor.a * _HoloColor.a * i.color.a;
 
                 return half4(finalColor * i.color.rgb, alpha);

@@ -121,12 +121,15 @@ Material:
     - _EnvironmentReflections: 1
     - _FlickerIntensity: 0.5
     - _FlickerSpeed: 4
+    - _GlitchIntensity: 0.1
+    - _GlitchSpeed: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
     - _GlowIntensity: 2
     - _Metallic: 0
+    - _NoiseIntensity: 0.02
     - _NoiseStrength: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
