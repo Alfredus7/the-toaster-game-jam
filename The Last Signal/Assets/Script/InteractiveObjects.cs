@@ -1,10 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class InteractiveObjects : MonoBehaviour
+public class InteractiveObject : MonoBehaviour
 {
     [Header("Configuración Outline")]
     [SerializeField] private Color highlightColor = Color.yellow;
+
+    [Header("Puzzle o Panel UI")]
+    [SerializeField] private GameObject puzzleUI; // ← Asigna aquí el panel que quieres abrir
 
     private Renderer rend;
     private MaterialPropertyBlock propBlock;
@@ -13,12 +16,25 @@ public class InteractiveObjects : MonoBehaviour
 
     void Awake()
     {
+        // Buscar Renderer en el padre si no hay en el mismo objeto
         rend = GetComponent<Renderer>();
+        if (rend == null)
+            rend = GetComponentInParent<Renderer>();
+
+        if (rend == null)
+        {
+            Debug.LogWarning($"[InteractiveObject] No se encontró Renderer en {name} ni en sus padres.");
+            return;
+        }
+
         propBlock = new MaterialPropertyBlock();
 
         // Obtener color original del outline
         rend.GetPropertyBlock(propBlock);
-        originalColor = rend.sharedMaterial.GetColor("_OutlineColor");
+        if (rend.sharedMaterial.HasProperty("_OutlineColor"))
+            originalColor = rend.sharedMaterial.GetColor("_OutlineColor");
+        else
+            originalColor = Color.white;
     }
 
     void OnTriggerEnter(Collider other)
@@ -27,6 +43,7 @@ public class InteractiveObjects : MonoBehaviour
         {
             isPlayerInside = true;
             UpdateOutlineColor(highlightColor);
+            other.SendMessage("SetInteractable", this, SendMessageOptions.DontRequireReceiver);
         }
     }
 
@@ -39,18 +56,31 @@ public class InteractiveObjects : MonoBehaviour
         }
     }
 
+    private bool canInteract = true;
+    public void Interact()
+    {
+        if (isPlayerInside)
+        {
+            if (puzzleUI != null && canInteract)
+            {
+                canInteract = false;
+                puzzleUI.SetActive(true);
+                GameManager.Instance.SetPlayerCanMove(false);
+                UpdateOutlineColor(originalColor);
+                this.gameObject.SetActive(false); 
+            }
+            else
+            {
+                Debug.LogWarning($"[InteractiveObject] No hay puzzle UI asignado en {name}");
+            }
+        }
+    }
+
     private void UpdateOutlineColor(Color color)
     {
+        if (rend == null) return;
         rend.GetPropertyBlock(propBlock);
         propBlock.SetColor("_OutlineColor", color);
         rend.SetPropertyBlock(propBlock);
     }
-
-    // (Opcional) Visualizador en escena
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = isPlayerInside ? Color.yellow : Color.cyan;
-        Gizmos.DrawWireCube(transform.position, GetComponent<Collider>().bounds.size);
-    }
 }
-

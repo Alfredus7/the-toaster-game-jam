@@ -27,28 +27,25 @@ public class TopDownMovement : MonoBehaviour
         Move();
     }
 
+    public bool canMove = true;
+
     public void Move()
     {
         if (!playerRoot || !controller) return;
+        if (!canMove) return; // ❌ Bloqueamos movimiento cuando no se puede mover
 
-        // En top-down, el movimiento es directo en el plano XZ
         Vector3 dir = new Vector3(moveInput.x, 0, moveInput.y).normalized;
-
-        // Velocidad
         float targetSpeed = moveSpeed * moveInput.magnitude;
         speed = Mathf.SmoothDamp(speed, targetSpeed, ref speedRef, smoothTime);
 
-        // Rotación hacia la dirección del movimiento
         if (dir.sqrMagnitude > 0.01f)
         {
             playerRoot.rotation = Quaternion.Slerp(playerRoot.rotation,
                 Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
         }
 
-        // Movimiento del controller
         controller.Move(dir * speed * Time.deltaTime);
 
-        // Animación
         if (animator)
         {
             float targetAnim = moveInput.magnitude;
@@ -56,6 +53,7 @@ public class TopDownMovement : MonoBehaviour
             animator.SetFloat("Speed", smoothed);
         }
     }
+
 
     public void ResetMove()
     {
