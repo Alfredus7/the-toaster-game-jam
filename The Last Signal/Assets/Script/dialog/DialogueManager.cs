@@ -91,7 +91,16 @@ public class DialogueManager : MonoBehaviour
         foreach (char c in text)
         {
             dialogueText.text += c;
-            yield return new WaitForSeconds(typingSpeed);
+
+            // Ajusta la pausa según el carácter
+            float delay = typingSpeed;
+
+            if (c == '…') delay = typingSpeed * 7f;  // pausa larga
+            else if (c == '—' || c == '-') delay = typingSpeed * 5f; // pausa media
+            else if (c == '.' || c == '!' || c == '?') delay = typingSpeed * 3f; // pausa corta
+            else if (c == ',') delay = typingSpeed * 2f; // pausa muy corta
+
+            yield return new WaitForSeconds(delay);
         }
 
         isTyping = false;
@@ -103,6 +112,7 @@ public class DialogueManager : MonoBehaviour
             autoCoroutine = StartCoroutine(AutoAdvance());
         }
     }
+
 
     IEnumerator AutoAdvance()
     {

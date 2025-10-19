@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public TMP_Text progressText;
 
-    [SerializeField] private int totalRepairableObjects;
+    [SerializeField] private int totalRepairableObjects = 10;
     private int repairedObjectsCount;
+
+    [Header("Barra animación")]
+    public float typingSpeed = 0.02f; // segundos por cubo
 
     private void Awake()
     {
@@ -28,28 +31,51 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateProgressUI();
+        UpdateProgressUIImmediate();
     }
 
     public void ObjectRepaired()
     {
         repairedObjectsCount++;
-        UpdateProgressUI();
+        StartCoroutine(UpdateProgressUIAnimated());
     }
 
-    private void UpdateProgressUI()
+    private void UpdateProgressUIImmediate()
     {
-        if (progressText != null)
+        // Mostrar la barra y porcentaje sin animación
+        int totalCubes = 25;
+        int filledCubes = Mathf.RoundToInt((repairedObjectsCount / (float)totalRepairableObjects) * totalCubes);
+        float percentage = (totalRepairableObjects > 0) ? ((float)repairedObjectsCount / totalRepairableObjects) * 100f : 0f;
+
+        string bar = "[";
+        for (int i = 0; i < totalCubes; i++)
         {
-            if (totalRepairableObjects > 0)
-            {
-                float percentage = ((float)repairedObjectsCount / totalRepairableObjects) * 100f;
-                progressText.text = $"Conexion Repara un: {percentage:F0}%";
-            }
-            else
-            {
-                progressText.text = "Conexion Repara un: 0%";
-            }
+            bar += i < filledCubes ? "■" : "□";
+        }
+        bar += "]";
+        progressText.text = $"{bar}\nConexión reparada un: {percentage:F0}%";
+    }
+
+    private IEnumerator UpdateProgressUIAnimated()
+    {
+        int totalCubes = 25;
+        float percentage = (totalRepairableObjects > 0) ? ((float)repairedObjectsCount / totalRepairableObjects) * 100f : 0f;
+
+        // Barra inicial con cubos vacíos
+        char[] barArray = new char[totalCubes];
+        for (int i = 0; i < totalCubes; i++)
+            barArray[i] = '□';
+
+        progressText.text = $"[{new string(barArray)}]\nConexión reparada un: {percentage:F0}%";
+
+        // Número de cubos que deben llenarse según progreso
+        int targetFilledCubes = Mathf.RoundToInt((repairedObjectsCount / (float)totalRepairableObjects) * totalCubes);
+
+        for (int i = 0; i < targetFilledCubes; i++)
+        {
+            barArray[i] = '■';
+            progressText.text = $"[{new string(barArray)}]\nConexión reparada un: {percentage:F0}%";
+            yield return new WaitForSeconds(typingSpeed);
         }
     }
 
@@ -58,10 +84,10 @@ public class GameManager : MonoBehaviour
         if (playerMovement != null)
             playerMovement.canMove = canMove;
     }
+
     public void ResetProgress()
     {
         repairedObjectsCount = 0;
-        totalRepairableObjects = 0;
-        UpdateProgressUI();
+        UpdateProgressUIImmediate();
     }
 }

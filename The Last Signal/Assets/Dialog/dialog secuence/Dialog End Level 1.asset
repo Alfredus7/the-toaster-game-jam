@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87da3c32bf5c9ba46b04abc88abbf11e, type: 3}
+  m_Name: Dialog End Level 1
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSequence
+  lines:
+  - character: {fileID: 11400000, guid: 0a183ea4b7fb77a46b51313d875b10cb, type: 2}
+    text: " \u2026excelente\u2026 se\xF1al\u2026 recuperada parcialmente."
+  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+    text: "Si alguien me escucha, estoy en el norte, cerca del repe\u2026"
+  - character: {fileID: 11400000, guid: 039f7ea10be1c034891c78d336b0051a, type: 2}
+    text: "..zzzzt... interferencia\u2026"
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
+    text: "Todav\xEDa es d\xE9bil, pero ahora puedo o\xEDrlo. No estoy solo\u2026\u201D"
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
+    text: "Si arreglo las dem\xE1s torres, quiz\xE1s pueda alcanzarlo.\u201D\n"

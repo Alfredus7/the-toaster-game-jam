@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Os red
   m_EditorClassIdentifier: Assembly-CSharp::DialogueCharacter
   characterName: 'OS red '
-  portrait: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  portrait: {fileID: -1009430858, guid: 8293f5957d20467459856df3c9a5903c, type: 3}
   Material: {fileID: 2100000, guid: 2ddb50a9eb1d4f44f8914f71c79e9104, type: 2}

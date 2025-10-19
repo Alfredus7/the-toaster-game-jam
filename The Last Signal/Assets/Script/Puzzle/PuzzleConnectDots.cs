@@ -29,7 +29,7 @@ public class PuzzleConnectDots : MonoBehaviour
     {
         if (cells.Count == 0 && gridParent != null)
             cells = gridParent.Cast<Transform>().Select(t => t.GetComponent<Cell>()).Where(c => c != null).ToList();
-
+        ClearMessage();
         ApplySpritesToCells();
         cells.ForEach(cell => cell.Init(this));
     }
