@@ -64,8 +64,8 @@ public class InteractiveObject : MonoBehaviour
             if (puzzleUI != null && canInteract)
             {
                 canInteract = false;
+                GameManager.Instance.SetPlayerCanMove();
                 puzzleUI.SetActive(true);
-                GameManager.Instance.SetPlayerCanMove(false);
                 UpdateOutlineColor(originalColor);
                 this.gameObject.SetActive(false); 
             }

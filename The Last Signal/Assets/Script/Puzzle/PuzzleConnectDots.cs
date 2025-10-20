@@ -1,8 +1,9 @@
-using UnityEngine;
 using System.Collections.Generic;
-using TMPro;
-using UnityEngine.UI;
 using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PuzzleConnectDots : MonoBehaviour
 {
@@ -23,6 +24,11 @@ public class PuzzleConnectDots : MonoBehaviour
 
     private Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
+    [Header("Eventos")]
+    public UnityEvent OnPuzzleStart; 
+    public UnityEvent OnPuzzleDraw; 
+    public UnityEvent OnPuzzleEnd; 
+
     private void Start() => InitializePuzzle();
 
     private void InitializePuzzle()
@@ -32,6 +38,7 @@ public class PuzzleConnectDots : MonoBehaviour
         ClearMessage();
         ApplySpritesToCells();
         cells.ForEach(cell => cell.Init(this));
+        OnPuzzleStart?.Invoke();
     }
 
     private void ApplySpritesToCells()
@@ -167,8 +174,8 @@ public class PuzzleConnectDots : MonoBehaviour
     private void OnPuzzleCompleted()
     {
         objectsToActivate.ForEach(obj => obj.SetActive(true));
-        GameManager.Instance?.SetPlayerCanMove(true);
-        GameManager.Instance?.ObjectRepaired();
+        // 🔔 Dispara el evento para avisar a otros scripts o botones
+        OnPuzzleEnd?.Invoke();
         gameObject.SetActive(false);
     }
 

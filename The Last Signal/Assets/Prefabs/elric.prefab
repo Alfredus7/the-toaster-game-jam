@@ -507,6 +507,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: elric
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a75fad93e1e2c94a8bbbb759b940a39, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5898897180640955581, guid: 4a75fad93e1e2c94a8bbbb759b940a39, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -543,6 +547,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a75fad93e1e2c94a8bbbb759b940a39, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5136982996238724804}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a75fad93e1e2c94a8bbbb759b940a39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7445230742749548238}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a75fad93e1e2c94a8bbbb759b940a39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5131655239856398640}
   m_SourcePrefab: {fileID: 100100000, guid: 4a75fad93e1e2c94a8bbbb759b940a39, type: 3}
 --- !u!4 &4914840930527704091 stripped
 Transform:
@@ -599,6 +609,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 10
   smoothTime: 0.1
+  canMove: 1
 --- !u!114 &5505224727998173521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,3 +665,24 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &7445230742749548238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6366895862627346766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7979438c11a529f479c698f6dc887189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  currentObject: {fileID: 0}
+--- !u!81 &5131655239856398640
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6366895862627346766}
+  m_Enabled: 1

@@ -79,10 +79,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerCanMove(bool canMove)
+    public void SetPlayerCanMove()
     {
         if (playerMovement != null)
-            playerMovement.canMove = canMove;
+        {
+            playerMovement.canMove = !playerMovement.canMove;
+        }
     }
 
     public void ResetProgress()
