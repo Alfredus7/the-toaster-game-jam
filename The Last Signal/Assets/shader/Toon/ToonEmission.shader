@@ -1,0 +1,282 @@
+Shader "Toon/ToonEmission"
+{
+    Properties
+    {
+        [MainTexture]_BaseMap("Texture", 2D) = "white" {}
+        [MainColor]_BaseColor("Color", Color) = (1,1,1,1)
+        [Toggle]_Segmented("Segmented", Float) = 1
+        _Steps("Steps", Range(1,25)) = 3
+        _Offset("Lit Offset", Range(-1,1.1)) = 0
+
+        [Header(Emission)]
+        _EmissionColor("Emission Color", Color) = (1,1,1,1)
+        _EmissionMap("Emission Map", 2D) = "white" {}
+        _EmissionIntensity("Emission Intensity", Range(0,10)) = 1
+
+        [Header(Outline)]
+        _OutlineColor("Outline Color", Color) = (0,0,0,1)
+        _OutlineWidth("Outline Width", Range(0,0.1)) = 0.01
+    }
+
+    SubShader
+    {
+        Tags { 
+            "RenderType"="Opaque" 
+            "RenderPipeline"="UniversalPipeline"
+        }
+        LOD 300
+
+        // Main forward lit pass
+        Pass
+        {
+            Name "ForwardLit"
+            Tags { "LightMode"="UniversalForward" }
+
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            #pragma multi_compile_fog
+            
+            #pragma shader_feature_local _ _SEGMENTED_ON
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+            struct Attributes {
+                float4 positionOS : POSITION;
+                float2 uv : TEXCOORD0;
+                float3 normalOS : NORMAL;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+            struct Varyings {
+                float2 uv : TEXCOORD0;
+                float3 positionWS : TEXCOORD1;
+                float3 normalWS   : TEXCOORD2;
+                float3 viewDirWS  : TEXCOORD3;
+                float4 shadowCoord : TEXCOORD4;
+                float4 positionCS : SV_POSITION;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
+            TEXTURE2D(_EmissionMap);
+            SAMPLER(sampler_EmissionMap);
+
+            CBUFFER_START(UnityPerMaterial)
+                float4 _BaseMap_ST;
+                float4 _EmissionMap_ST;
+                half4  _BaseColor;
+                half4  _EmissionColor;
+                half   _Steps;
+                half   _Offset;
+                float  _EmissionIntensity;
+            CBUFFER_END
+
+            Varyings vert (Attributes IN)
+            {
+                Varyings o;
+                UNITY_SETUP_INSTANCE_ID(IN);
+                UNITY_TRANSFER_INSTANCE_ID(IN, o);
+                
+                VertexPositionInputs vpos = GetVertexPositionInputs(IN.positionOS.xyz);
+                VertexNormalInputs vnor  = GetVertexNormalInputs(IN.normalOS);
+                
+                o.positionCS = vpos.positionCS;
+                o.positionWS = vpos.positionWS;
+                o.normalWS   = vnor.normalWS;
+                o.viewDirWS  = GetWorldSpaceNormalizeViewDir(vpos.positionWS);
+                o.uv         = TRANSFORM_TEX(IN.uv, _BaseMap);
+                o.shadowCoord = TransformWorldToShadowCoord(o.positionWS);
+                return o;
+            }
+
+            half4 frag (Varyings i) : SV_Target
+            {
+                half4 baseTex = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, i.uv);
+                Light mainLight = GetMainLight(i.shadowCoord);
+                
+                half3 n = normalize(i.normalWS);
+                half ndl = dot(n, mainLight.direction) + _Offset;
+
+                #ifdef _SEGMENTED_ON
+                    half toon = floor(saturate(ndl) * _Steps) / _Steps;
+                #else
+                    half toon = smoothstep(0,1,saturate(ndl));
+                #endif
+
+                half3 ambient = SampleSH(n) * 0.1;
+                half3 direct  = mainLight.color * mainLight.distanceAttenuation * mainLight.shadowAttenuation * toon;
+
+                #ifdef _ADDITIONAL_LIGHTS
+                uint count = GetAdditionalLightsCount();
+                for (uint iL = 0u; iL < count; ++iL)
+                {
+                    Light light = GetAdditionalLight(iL, i.positionWS);
+                    half addNdl = dot(n, light.direction) + _Offset;
+                    half addToon = floor(saturate(addNdl) * _Steps) / _Steps;
+                    direct += light.color * light.distanceAttenuation * light.shadowAttenuation * addToon;
+                }
+                #endif
+
+                half3 color = baseTex.rgb * _BaseColor.rgb * (direct + ambient);
+
+                // Add emission to the final color (always applied)
+                half3 emissionTex = SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, TRANSFORM_TEX(i.uv, _EmissionMap)).rgb;
+                half3 emission = emissionTex * _EmissionColor.rgb * _EmissionIntensity;
+                color += emission;
+
+                return half4(color, 1);
+            }
+            ENDHLSL
+        }
+
+        // Outline Pass
+        Pass
+        {
+            Name "Outline"
+            Tags { "LightMode"="SRPDefaultUnlit" }
+            Cull Front
+            ZWrite On
+            ZTest LEqual
+
+            HLSLPROGRAM
+            #pragma vertex OutlineVert
+            #pragma fragment OutlineFrag
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct Attributes {
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+            };
+
+            struct Varyings {
+                float4 positionCS : SV_POSITION;
+            };
+
+            CBUFFER_START(UnityPerMaterial)
+                float _OutlineWidth;
+                half4 _OutlineColor;
+            CBUFFER_END
+
+            Varyings OutlineVert (Attributes IN)
+            {
+                Varyings o;
+                
+                VertexPositionInputs pos = GetVertexPositionInputs(IN.positionOS.xyz);
+                VertexNormalInputs nrm  = GetVertexNormalInputs(IN.normalOS);
+                
+                // Expand the position along the normal for outline
+                float3 posWS = pos.positionWS + nrm.normalWS * _OutlineWidth;
+                o.positionCS = TransformWorldToHClip(posWS);
+                
+                return o;
+            }
+
+            half4 OutlineFrag(Varyings i) : SV_Target
+            {
+                return _OutlineColor;
+            }
+            ENDHLSL
+        }
+
+        // ShadowCaster pass
+        Pass
+        {
+            Name "ShadowCaster"
+            Tags{"LightMode" = "ShadowCaster"}
+
+            ZWrite On
+            ZTest LEqual
+            ColorMask 0
+
+            HLSLPROGRAM
+            #pragma vertex ShadowPassVertex
+            #pragma fragment ShadowPassFragment
+
+            // Use a simpler approach for ShadowCaster
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct Attributes
+            {
+                float4 positionOS   : POSITION;
+                float3 normalOS     : NORMAL;
+                float2 texcoord     : TEXCOORD0;
+            };
+
+            struct Varyings
+            {
+                float2 uv           : TEXCOORD0;
+                float4 positionCS   : SV_POSITION;
+            };
+
+            float4 _BaseMap_ST;
+
+            Varyings ShadowPassVertex(Attributes input)
+            {
+                Varyings output;
+                VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
+                output.positionCS = vertexInput.positionCS;
+                output.uv = TRANSFORM_TEX(input.texcoord, _BaseMap);
+                return output;
+            }
+
+            half4 ShadowPassFragment(Varyings input) : SV_TARGET
+            {
+                return 0;
+            }
+            ENDHLSL
+        }
+
+        // DepthOnly pass (optional but recommended)
+        Pass
+        {
+            Name "DepthOnly"
+            Tags{"LightMode" = "DepthOnly"}
+
+            ZWrite On
+            ColorMask 0
+
+            HLSLPROGRAM
+            #pragma vertex DepthOnlyVertex
+            #pragma fragment DepthOnlyFragment
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct Attributes
+            {
+                float4 position     : POSITION;
+                float2 texcoord     : TEXCOORD0;
+            };
+
+            struct Varyings
+            {
+                float2 uv           : TEXCOORD0;
+                float4 positionCS   : SV_POSITION;
+            };
+
+            Varyings DepthOnlyVertex(Attributes input)
+            {
+                Varyings output;
+                VertexPositionInputs vertexInput = GetVertexPositionInputs(input.position.xyz);
+                output.positionCS = vertexInput.positionCS;
+                output.uv = input.texcoord;
+                return output;
+            }
+
+            half4 DepthOnlyFragment(Varyings input) : SV_TARGET
+            {
+                return 0;
+            }
+            ENDHLSL
+        }
+    }
+    FallBack "Universal Render Pipeline/Simple Lit"
+}
