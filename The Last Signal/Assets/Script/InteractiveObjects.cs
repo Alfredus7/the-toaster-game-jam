@@ -7,20 +7,19 @@ public class InteractiveObject : MonoBehaviour
     [SerializeField] private Color highlightColor = Color.yellow;
 
     [Header("Puzzle o Panel UI")]
-    [SerializeField] private GameObject puzzleUI; // ← Asigna aquí el panel que quieres abrir
+    [SerializeField] private GameObject puzzleUI; // Panel a abrir
 
     private Renderer rend;
     private MaterialPropertyBlock propBlock;
     private Color originalColor;
     private bool isPlayerInside = false;
 
+    public bool canInteract = true;
+
     void Awake()
     {
-        // Buscar Renderer en el padre si no hay en el mismo objeto
-        rend = GetComponent<Renderer>();
-        if (rend == null)
-            rend = GetComponentInParent<Renderer>();
-
+        // Buscar Renderer en el objeto o sus padres
+        rend = GetComponent<Renderer>() ?? GetComponentInParent<Renderer>();
         if (rend == null)
         {
             Debug.LogWarning($"[InteractiveObject] No se encontró Renderer en {name} ni en sus padres.");
@@ -28,57 +27,57 @@ public class InteractiveObject : MonoBehaviour
         }
 
         propBlock = new MaterialPropertyBlock();
-
-        // Obtener color original del outline
         rend.GetPropertyBlock(propBlock);
-        if (rend.sharedMaterial.HasProperty("_OutlineColor"))
-            originalColor = rend.sharedMaterial.GetColor("_OutlineColor");
-        else
-            originalColor = Color.white;
+
+        originalColor = rend.sharedMaterial.HasProperty("_OutlineColor")
+            ? rend.sharedMaterial.GetColor("_OutlineColor")
+            : Color.white;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (canInteract && other.CompareTag("Player"))
         {
             isPlayerInside = true;
-            UpdateOutlineColor(highlightColor);
+            SetOutlineColor(highlightColor);
             other.SendMessage("SetInteractable", this, SendMessageOptions.DontRequireReceiver);
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (canInteract && other.CompareTag("Player"))
         {
             isPlayerInside = false;
-            UpdateOutlineColor(originalColor);
+            SetOutlineColor(originalColor);
         }
     }
 
-    private bool canInteract = true;
     public void Interact()
     {
-        if (isPlayerInside)
+        if (!isPlayerInside || !canInteract) return;
+
+        if (puzzleUI != null)
         {
-            if (puzzleUI != null && canInteract)
-            {
-                canInteract = false;
-                GameManager.Instance.SetPlayerCanMove();
-                puzzleUI.SetActive(true);
-                UpdateOutlineColor(originalColor);
-                this.gameObject.SetActive(false); 
-            }
-            else
-            {
-                Debug.LogWarning($"[InteractiveObject] No hay puzzle UI asignado en {name}");
-            }
+            canInteract = false;
+            puzzleUI.SetActive(true);
+            SetOutlineColor(originalColor);
+        }
+        else
+        {
+            Debug.LogWarning($"[InteractiveObject] No hay puzzle UI asignado en {name}");
         }
     }
 
-    private void UpdateOutlineColor(Color color)
+    public void setCanInteract(bool caninteract)
+    {
+        canInteract = caninteract;
+    }
+
+    private void SetOutlineColor(Color color)
     {
         if (rend == null) return;
+
         rend.GetPropertyBlock(propBlock);
         propBlock.SetColor("_OutlineColor", color);
         rend.SetPropertyBlock(propBlock);

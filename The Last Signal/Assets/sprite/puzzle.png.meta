@@ -140,7 +140,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 300
         width: 300
         height: 300
       alignment: 0
@@ -162,7 +162,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 300
-        y: 0
+        y: 300
         width: 300
         height: 300
       alignment: 0
@@ -184,7 +184,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 600
-        y: 0
+        y: 300
         width: 300
         height: 300
       alignment: 0
@@ -195,7 +195,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87a5077845831554e854cda53a1423fd
+      spriteID: 9f6eba1b08434db4bbaff22c62218424
       internalID: -1230329207
       vertices: []
       indices: 
@@ -205,7 +205,7 @@ TextureImporter:
       name: puzzle_3
       rect:
         serializedVersion: 2
-        x: 900
+        x: 0
         y: 0
         width: 300
         height: 300
@@ -217,7 +217,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7278cc44061667047b4f382641041a26
+      spriteID: 3584fed5d2a322e47952728602afc9cf
       internalID: -1489692580
       vertices: []
       indices: 
@@ -227,7 +227,7 @@ TextureImporter:
       name: puzzle_4
       rect:
         serializedVersion: 2
-        x: 1200
+        x: 300
         y: 0
         width: 300
         height: 300
@@ -239,8 +239,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc6105b12a71bac4cb712561fe7f3ceb
+      spriteID: de67ca71ec39b8749b704d158455fd1f
       internalID: 413031293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: puzzle_5
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd94f962c9c991b4684dfe7625251287
+      internalID: -1226136173
       vertices: []
       indices: 
       edges: []
@@ -259,13 +281,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":300.0,"y":300.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":300.0,"y":300.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       puzzle_0: -681514828
       puzzle_1: 547820816
       puzzle_2: -1230329207
       puzzle_3: -1489692580
       puzzle_4: 413031293
+      puzzle_5: -1226136173
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
