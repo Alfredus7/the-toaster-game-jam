@@ -14,7 +14,7 @@ public class PuzzleConnectDots : MonoBehaviour
     [SerializeField] private List<GameObject> objectsToActivate = new List<GameObject>();
 
     [Header("Sprites")]
-    [SerializeField] private Sprite On, empty, block, Off;
+    [SerializeField] private Sprite start, empty, block, end;
 
     private List<Cell> cells = new List<Cell>();
     private bool isDrawing = false;
@@ -50,9 +50,9 @@ public class PuzzleConnectDots : MonoBehaviour
 
             cellImage.sprite = cell.type switch
             {
-                Cell.CellType.DotStart => On,
+                Cell.CellType.Start => start,
                 Cell.CellType.Block => block,
-                Cell.CellType.DotEnd => Off,
+                Cell.CellType.End => end,
                 _ => empty
             };
         }
@@ -70,7 +70,7 @@ public class PuzzleConnectDots : MonoBehaviour
 
     public void StartDrawing(Cell cell)
     {
-        if (cell.type != Cell.CellType.DotStart) return;
+        if (cell.type != Cell.CellType.Start) return;
 
         startCell = cell;
         currentColor = cell.GetDotColor();
@@ -89,7 +89,7 @@ public class PuzzleConnectDots : MonoBehaviour
         if (cell.type == Cell.CellType.Empty)
         {
             cell.SetColor(currentColor);
-            cell.SetImage(On);
+            cell.SetImage(start);
         }
 
         paths[currentColor].Add(cell);
@@ -105,7 +105,7 @@ public class PuzzleConnectDots : MonoBehaviour
         Cell targetEnd = FindValidEndCell(lastCell);
         if (targetEnd != null)
         {
-            targetEnd.SetImage(On);
+            targetEnd.SetImage(start);
             path.Add(targetEnd);
             ShowMessage("Se reparó un nodo");
             CheckPuzzleCompletion();
@@ -122,7 +122,7 @@ public class PuzzleConnectDots : MonoBehaviour
     private Cell FindValidEndCell(Cell lastCell)
     {
         return cells.FirstOrDefault(c =>
-            c.type == Cell.CellType.DotEnd &&
+            c.type == Cell.CellType.End &&
             c.GetDotColor() == currentColor &&
             IsValidNeighbor(lastCell, c));
     }
@@ -152,13 +152,13 @@ public class PuzzleConnectDots : MonoBehaviour
 
     private void CheckPuzzleCompletion()
     {
-        bool allConnected = cells.Where(c => c.type == Cell.CellType.DotStart)
+        bool allConnected = cells.Where(c => c.type == Cell.CellType.Start)
             .All(startCell =>
             {
                 Color color = startCell.GetDotColor();
                 return paths.ContainsKey(color) &&
                        paths[color].Count >= 2 &&
-                       paths[color].Last().type == Cell.CellType.DotEnd &&
+                       paths[color].Last().type == Cell.CellType.End &&
                        paths[color].Last().GetDotColor() == color;
             });
 

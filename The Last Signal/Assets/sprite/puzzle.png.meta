@@ -161,7 +161,7 @@ TextureImporter:
       name: puzzle_1
       rect:
         serializedVersion: 2
-        x: 330
+        x: 300
         y: 0
         width: 300
         height: 300
@@ -183,7 +183,7 @@ TextureImporter:
       name: puzzle_2
       rect:
         serializedVersion: 2
-        x: 660
+        x: 600
         y: 0
         width: 300
         height: 300
@@ -205,7 +205,7 @@ TextureImporter:
       name: puzzle_3
       rect:
         serializedVersion: 2
-        x: 985
+        x: 900
         y: 0
         width: 300
         height: 300
@@ -219,6 +219,28 @@ TextureImporter:
       bones: []
       spriteID: 7278cc44061667047b4f382641041a26
       internalID: -1489692580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: puzzle_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc6105b12a71bac4cb712561fe7f3ceb
+      internalID: 413031293
       vertices: []
       indices: 
       edges: []
@@ -237,12 +259,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":300.0,"y":300.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       puzzle_0: -681514828
       puzzle_1: 547820816
       puzzle_2: -1230329207
       puzzle_3: -1489692580
+      puzzle_4: 413031293
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Image))]
 public class Cell : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerUpHandler
 {
-    public enum CellType { Empty, DotStart, DotEnd, Block }
+    public enum CellType { Empty, Start, End, Block }
     public CellType type = CellType.Empty;
 
     [Header("Solo para Dot")]
@@ -21,7 +21,7 @@ public class Cell : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
         image = GetComponent<Image>();
         baseColor = image.color;
 
-        if (type == CellType.DotStart || type == CellType.DotEnd)
+        if (type == CellType.Start || type == CellType.End)
             dotColor = image.color; // Asignar automáticamente desde Image
     }
 

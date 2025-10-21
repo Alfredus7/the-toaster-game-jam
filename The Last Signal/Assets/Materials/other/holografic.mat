@@ -128,7 +128,7 @@ Material:
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
-    - _GlowIntensity: 0.72
+    - _GlowIntensity: 1.2
     - _Metallic: 0
     - _NoiseIntensity: 0.02
     - _NoiseStrength: 0
