@@ -20,7 +20,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: _Progress _Vignette
+  m_LockedProperties: _Vignette
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
