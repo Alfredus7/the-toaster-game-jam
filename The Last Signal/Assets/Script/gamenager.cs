@@ -1,6 +1,6 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,11 +12,15 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public TMP_Text progressText;
 
+    [Header("Reparaciones")]
     [SerializeField] private int totalRepairableObjects = 10;
     private int repairedObjectsCount;
 
-    [Header("Barra animación")]
-    public float typingSpeed = 0.02f; // segundos por cubo
+    [Header("Animación barra")]
+    public float typingSpeed = 0.02f;
+
+    [Header("Nivel que desbloquea al completar este")]
+    public int nextLevelToUnlock = -1;
 
     private void Awake()
     {
@@ -38,43 +42,33 @@ public class GameManager : MonoBehaviour
     {
         repairedObjectsCount++;
         StartCoroutine(UpdateProgressUIAnimated());
+
+        if (repairedObjectsCount >= totalRepairableObjects)
+            OnLevelComplete();
     }
 
     private void UpdateProgressUIImmediate()
     {
-        // Mostrar la barra y porcentaje sin animación
         int totalCubes = 25;
         int filledCubes = Mathf.RoundToInt((repairedObjectsCount / (float)totalRepairableObjects) * totalCubes);
-        float percentage = (totalRepairableObjects > 0) ? ((float)repairedObjectsCount / totalRepairableObjects) * 100f : 0f;
+        float percentage = (repairedObjectsCount / (float)totalRepairableObjects) * 100f;
 
-        string bar = "[";
-        for (int i = 0; i < totalCubes; i++)
-        {
-            bar += i < filledCubes ? "■" : "□";
-        }
-        bar += "]";
+        string bar = "[" + new string('■', filledCubes) + new string('□', totalCubes - filledCubes) + "]";
         progressText.text = $"{bar}\nConexión reparada un: {percentage:F0}%";
     }
 
     private IEnumerator UpdateProgressUIAnimated()
     {
         int totalCubes = 25;
-        float percentage = (totalRepairableObjects > 0) ? ((float)repairedObjectsCount / totalRepairableObjects) * 100f : 0f;
+        float percentage = (repairedObjectsCount / (float)totalRepairableObjects) * 100f;
+        int targetFilled = Mathf.RoundToInt((repairedObjectsCount / (float)totalRepairableObjects) * totalCubes);
 
-        // Barra inicial con cubos vacíos
-        char[] barArray = new char[totalCubes];
-        for (int i = 0; i < totalCubes; i++)
-            barArray[i] = '□';
+        char[] bar = new string('□', totalCubes).ToCharArray();
 
-        progressText.text = $"[{new string(barArray)}]\nConexión reparada un: {percentage:F0}%";
-
-        // Número de cubos que deben llenarse según progreso
-        int targetFilledCubes = Mathf.RoundToInt((repairedObjectsCount / (float)totalRepairableObjects) * totalCubes);
-
-        for (int i = 0; i < targetFilledCubes; i++)
+        for (int i = 0; i < targetFilled; i++)
         {
-            barArray[i] = '■';
-            progressText.text = $"[{new string(barArray)}]\nConexión reparada un: {percentage:F0}%";
+            bar[i] = '■';
+            progressText.text = $"[{new string(bar)}]\nConexión reparada un: {percentage:F0}%";
             yield return new WaitForSeconds(typingSpeed);
         }
     }
@@ -82,14 +76,23 @@ public class GameManager : MonoBehaviour
     public void SetPlayerCanMove()
     {
         if (playerMovement != null)
-        {
             playerMovement.canMove = !playerMovement.canMove;
-        }
     }
 
     public void ResetProgress()
     {
         repairedObjectsCount = 0;
         UpdateProgressUIImmediate();
+    }
+    //in gamemanager in levels
+    public void OnLevelComplete()
+    {
+        Debug.Log("🏁 Nivel completado.");
+
+        if (nextLevelToUnlock >= 0 && LevelProgressManager.Instance != null)
+        {
+            LevelProgressManager.Instance.UnlockLevel(nextLevelToUnlock);
+            Debug.Log($"🔓 Desbloqueando nivel con ID {nextLevelToUnlock}");
+        }
     }
 }

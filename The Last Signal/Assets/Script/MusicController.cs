@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class MusicManager : MonoBehaviour
+public class MusicController : MonoBehaviour
 {
-    [Header("Configuración de Música")]
+    [Header("Configuraciï¿½n de Mï¿½sica")]
     public AudioSource musicSource;
     public float fadeDuration = 2.0f;
 
@@ -19,7 +19,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    // Método para iniciar música con fade in suave
+    // Mï¿½todo para iniciar mï¿½sica con fade in suave
     public void PlayMusic()
     {
         if (musicSource == null) return;
@@ -33,7 +33,7 @@ public class MusicManager : MonoBehaviour
         currentFadeCoroutine = StartCoroutine(FadeInCoroutine());
     }
 
-    // Método para detener música con fade out suave
+    // Mï¿½todo para detener mï¿½sica con fade out suave
     public void StopMusic()
     {
         if (musicSource == null || !musicSource.isPlaying) return;
