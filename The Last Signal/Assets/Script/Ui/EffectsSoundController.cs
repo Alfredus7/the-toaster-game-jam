@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonSound : MonoBehaviour
+public class EffectsSoundController : MonoBehaviour
 {
     public AudioClip clickSound;
     private AudioSource audioSource;
@@ -11,7 +11,7 @@ public class ButtonSound : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayClickSound()
+    public void PlayEffect()
     {
         if (clickSound != null)
         {

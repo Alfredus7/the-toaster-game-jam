@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MusicController : MonoBehaviour
 {
-    [Header("Configuraci�n de M�sica")]
+    [Header("Configuracion de Musica")]
     public AudioSource musicSource;
     public float fadeDuration = 2.0f;
 

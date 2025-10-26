@@ -14,7 +14,7 @@ public class PuzzleConnectDots : MonoBehaviour
     [SerializeField] private Color InBlankColor = new Color(0f, 1f, 0.53f);
 
     [Header("Eventos")]
-    public UnityEvent OnPuzzleStart, OnPuzzleDraw, OnPuzzleEnd;
+    public UnityEvent OnPuzzleStart, OnPuzzleStartDraw, OnPuzzleFail, OnPuzzleConectNode, OnPuzzleEnd;
 
     private List<Cell> cells = new List<Cell>();
     private bool isDrawing, isLocked;
@@ -64,6 +64,7 @@ public class PuzzleConnectDots : MonoBehaviour
         currentColor = cell.GetDotColor();
         isDrawing = true;
         paths[currentColor] = new List<Cell> { cell };
+        OnPuzzleStartDraw?.Invoke();
     }
 
     public void ContinueDrawing(Cell cell)
@@ -93,6 +94,7 @@ public class PuzzleConnectDots : MonoBehaviour
                 FailPath("Polaridad incorrecta en nodo final");
                 return;
             }
+            OnPuzzleConectNode?.Invoke(); // ✅ Evento de conexión invocado
         }
 
         // Lógica para Dots (puntos)
@@ -127,7 +129,7 @@ public class PuzzleConnectDots : MonoBehaviour
         }
 
         paths[currentColor].Add(cell);
-        OnPuzzleDraw?.Invoke();
+       
     }
 
     public void EndDrawing(Cell cell)
@@ -149,6 +151,7 @@ public class PuzzleConnectDots : MonoBehaviour
         isLocked = true;
         isDrawing = false;
         ShowMessage(msg);
+        OnPuzzleFail?.Invoke(); // ✅ Evento de fallo invocado
         Invoke(nameof(DelayedResetPuzzle), 0.5f);
     }
 
