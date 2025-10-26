@@ -519,7 +519,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 10
   smoothTime: 0.1
-  canMove: 1
+  canMove: 0
 --- !u!114 &5505224727998173521
 MonoBehaviour:
   m_ObjectHideFlags: 0

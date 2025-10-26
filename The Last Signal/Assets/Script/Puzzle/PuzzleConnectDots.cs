@@ -94,7 +94,7 @@ public class PuzzleConnectDots : MonoBehaviour
                 FailPath("Polaridad incorrecta en nodo final");
                 return;
             }
-            OnPuzzleConectNode?.Invoke(); // ✅ Evento de conexión invocado
+            
         }
 
         // Lógica para Dots (puntos)
@@ -139,6 +139,7 @@ public class PuzzleConnectDots : MonoBehaviour
         if (paths[currentColor].Last().type == Cell.CellType.End)
         {
             ShowMessage("¡Conexión establecida!");
+            OnPuzzleConectNode?.Invoke(); // ✅ Evento de conexión invocado
             isDrawing = false;
             CheckPuzzleProgress();
         }
