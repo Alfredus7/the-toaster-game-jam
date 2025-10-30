@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: props
+  m_Name: props1
   m_Shader: {fileID: 4800000, guid: 8f35f556766cd054f9b42c5e0bd1cc09, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -26,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 96a1974273f498a4597ec0a65935b6f9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 43c03fb3b916f4d4b9cdc0db0b1ae93f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -97,14 +97,13 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EmissionIntensity: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Offset: 0.3
+    - _Offset: 0
     - _OutlineWidth: 0.02
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -117,7 +116,6 @@ Material:
     - _SrcBlendAlpha: 1
     - _Steps: 3
     - _Surface: 0
-    - _UseEmission: 0
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
@@ -129,7 +127,7 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &3711762157042761084
+--- !u!114 &6164375684738324489
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

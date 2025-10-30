@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: radio+tower
+  m_Name: lamp
   m_Shader: {fileID: 4800000, guid: 383b48450e7615948b71ba9be3f495d2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -26,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 16952c3d0936f1f4bb47c52c5facf513, type: 3}
+        m_Texture: {fileID: 2800000, guid: 440bdef5ed72d68469ff4296da2a2f0e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:

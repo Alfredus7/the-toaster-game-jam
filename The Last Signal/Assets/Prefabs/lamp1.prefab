@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 579062393135259194}
   - component: {fileID: 2171933401556626008}
   m_Layer: 0
-  m_Name: lamp
+  m_Name: lamp1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071533454324580487}
-  m_Mesh: {fileID: -2731774030762939528, guid: 004eaa476a5002b44a0e58a27db169d9, type: 3}
+  m_Mesh: {fileID: 5618252399206534183, guid: 90846ffc74da63d4395cd450e928cff8, type: 3}
 --- !u!23 &579062393135259194
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6ef5edb087bfb9b4784f60c5003aaf01, type: 2}
+  - {fileID: 2100000, guid: 9d22d66a2125e59448ac9f4987c289fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,7 +113,7 @@ CapsuleCollider:
   m_Radius: 0.02
   m_Height: 0.4006369
   m_Direction: 1
-  m_Center: {x: 0, y: -0.018025018, z: 0}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &4730085697467616456
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 4730085697467616456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0937, y: 0.1105, z: 0.0831}
+  m_LocalPosition: {x: -0.003, y: 0.328, z: -0.053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
