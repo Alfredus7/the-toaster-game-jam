@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9212879170545403449}
   - component: {fileID: 6502235393560447993}
   - component: {fileID: 8471952832413247795}
+  - component: {fileID: 7463816476008847528}
   m_Layer: 0
   m_Name: lamp2
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.72694033, z: 0, w: 0.68670064}
   m_LocalPosition: {x: -0.9650707, y: 0.00000047683716, z: -4.136589}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6514785647094072264}
@@ -114,6 +115,24 @@ CapsuleCollider:
   m_Height: 0.4006369
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &7463816476008847528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4573827827548010119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac5b6b5f5c1ee941b523f1be4c2e12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RepairableLight
+  lightComponent: {fileID: 6672349683532369245}
+  normalIntensity: 5
+  normalRange: 20
+  failIntensity: 1
+  failRange: 6
+  flickerInterval: 0.3
 --- !u!1 &5187059524396913506
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +176,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 0.81960785, g: 0.654902, b: 0.3019608, a: 1}
+  m_Color: {r: 0.49309057, g: 1, b: 0.48584908, a: 1}
   m_Intensity: 5
   m_Range: 3
   m_SpotAngle: 30
@@ -197,7 +216,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1

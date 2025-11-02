@@ -235,6 +235,7 @@ public class PuzzleConnectDots : MonoBehaviour
     private void OnPuzzleCompleted()
     {
         OnPuzzleEnd?.Invoke();
+
         gameObject.SetActive(false);
     }
 

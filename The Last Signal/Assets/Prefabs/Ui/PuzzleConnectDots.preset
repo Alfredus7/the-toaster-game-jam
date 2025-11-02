@@ -1,0 +1,584 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PuzzleConnectDots
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 53624db12127abc46b896ba81eaf939d, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: Assembly-CSharp::PuzzleConnectDots
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gridParent
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: messageText
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: start
+    value: 
+    objectReference: {fileID: -681514828, guid: 2529313e40b25734cb3100099e5e233c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: empty
+    value: 
+    objectReference: {fileID: 547820816, guid: 2529313e40b25734cb3100099e5e233c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: Fails
+    value: 
+    objectReference: {fileID: -1230329207, guid: 2529313e40b25734cb3100099e5e233c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: end
+    value: 
+    objectReference: {fileID: -1489692580, guid: 2529313e40b25734cb3100099e5e233c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: dot
+    value: 
+    objectReference: {fileID: 413031293, guid: 2529313e40b25734cb3100099e5e233c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: path
+    value: 
+    objectReference: {fileID: -1226136173, guid: 2529313e40b25734cb3100099e5e233c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: InBlankColor.r
+    value: 0.2352941
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: InBlankColor.g
+    value: 0.7019608
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: InBlankColor.b
+    value: 0.4431373
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: InBlankColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+    value: GameManager, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+    value: SetPlayerCanMove
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+    value: MusicManager, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+    value: PlayMusic
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+    value: EffectsSoundManager, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+    value: PlayEffect
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+    value: clickDigital
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleStartDraw.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+    value: EffectsSoundManager, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+    value: PlayEffect
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+    value: Fails
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+    value: EffectsSoundManager, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+    value: PlayEffect
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+    value: Sucess
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleConectNode.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.size
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+    value: GameManager, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+    value: ObjectRepaired
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+    value: GameManager, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+    value: SetPlayerCanMove
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+    value: MusicManager, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+    value: StopMusic
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+    value: RepairableLight, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+    value: SetLightRepaired
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+    value: RepairableLight, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+    value: SetLightFail
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_StringArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_BoolArgument
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+    value: InteractiveObject, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+    value: setCanInteract
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_StringArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_BoolArgument
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
+  m_CoupledType:
+    m_NativeTypeID: 0
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_CoupledProperties: []

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2356950957314027521}
   - component: {fileID: 579062393135259194}
   - component: {fileID: 2171933401556626008}
+  - component: {fileID: 6045143796049006313}
   m_Layer: 0
   m_Name: lamp1
   m_TagString: Untagged
@@ -114,6 +115,24 @@ CapsuleCollider:
   m_Height: 0.4006369
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &6045143796049006313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071533454324580487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac5b6b5f5c1ee941b523f1be4c2e12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RepairableLight
+  lightComponent: {fileID: 7835367793542480109}
+  normalIntensity: 5
+  normalRange: 20
+  failIntensity: 1
+  failRange: 6
+  flickerInterval: 0.3
 --- !u!1 &4730085697467616456
 GameObject:
   m_ObjectHideFlags: 0
