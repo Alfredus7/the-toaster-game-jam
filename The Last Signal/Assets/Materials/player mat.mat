@@ -102,7 +102,7 @@ Material:
     - _DownscaleLevel: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EmissionIntensity: 3.76
+    - _EmissionIntensity: 1
     - _EnableDownscaling: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0

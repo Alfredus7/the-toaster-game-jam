@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61536e66f6a9e524286a18a5fbb62aea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.3999996
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61536e66f6a9e524286a18a5fbb62aea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -425,7 +425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61536e66f6a9e524286a18a5fbb62aea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9799995
+      value: 2.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61536e66f6a9e524286a18a5fbb62aea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1155,8 +1155,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.01
+  far clip plane: 100
   field of view: 60.000004
   orthographic: 1
   orthographic size: 5
@@ -4006,8 +4006,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.32951736, y: 0.21489143, z: 0.54227066}
-  m_Center: {x: 0.0039212257, y: 0.10335319, z: -0.00043734908}
+  m_Size: {x: 0.32951736, y: 0.21489143, z: 0.7618335}
+  m_Center: {x: 0.003921223, y: 0.103353195, z: -0.11021872}
 --- !u!23 &1045882838
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4940,8 +4940,8 @@ MonoBehaviour:
   Lens:
     FieldOfView: 60.000004
     OrthographicSize: 5
-    NearClipPlane: 0.3
-    FarClipPlane: 1000
+    NearClipPlane: 0.01
+    FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
