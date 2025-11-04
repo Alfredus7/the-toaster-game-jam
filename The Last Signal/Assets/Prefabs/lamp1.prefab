@@ -128,10 +128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RepairableLight
   lightComponent: {fileID: 7835367793542480109}
-  normalIntensity: 5
-  normalRange: 20
-  failIntensity: 1
-  failRange: 6
+  normalIntensity: 6
+  normalRange: 25
+  failIntensity: 2
+  failRange: 10
   flickerInterval: 0.3
 --- !u!1 &4730085697467616456
 GameObject:
@@ -176,7 +176,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 0.81960785, g: 0.654902, b: 0.3019608, a: 1}
+  m_Color: {r: 1, g: 0.7647059, b: 0.4, a: 1}
   m_Intensity: 5
   m_Range: 3
   m_SpotAngle: 30
@@ -216,7 +216,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
