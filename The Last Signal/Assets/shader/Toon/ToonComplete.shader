@@ -1,4 +1,4 @@
-Shader "Toon/ToonEmission"
+Shader "Toon/ToonComplete"
 {
     Properties
     {
@@ -12,6 +12,10 @@ Shader "Toon/ToonEmission"
         _EmissionColor("Emission Color", Color) = (1,1,1,1)
         _EmissionMap("Emission Map", 2D) = "white" {}
         _EmissionIntensity("Emission Intensity", Range(0,10)) = 1
+
+        [Header(Outline)]
+        _OutlineColor("Outline Color", Color) = (0,0,0,1)
+        _OutlineWidth("Outline Width", Range(0,0.1)) = 0.01
     }
 
     SubShader
@@ -129,6 +133,56 @@ Shader "Toon/ToonEmission"
                 color += emission;
 
                 return half4(color, 1);
+            }
+            ENDHLSL
+        }
+
+        // Outline Pass
+        Pass
+        {
+            Name "Outline"
+            Tags { "LightMode"="SRPDefaultUnlit" }
+            Cull Front
+            ZWrite On
+            ZTest LEqual
+
+            HLSLPROGRAM
+            #pragma vertex OutlineVert
+            #pragma fragment OutlineFrag
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct Attributes {
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+            };
+
+            struct Varyings {
+                float4 positionCS : SV_POSITION;
+            };
+
+            CBUFFER_START(UnityPerMaterial)
+                float _OutlineWidth;
+                half4 _OutlineColor;
+            CBUFFER_END
+
+            Varyings OutlineVert (Attributes IN)
+            {
+                Varyings o;
+                
+                VertexPositionInputs pos = GetVertexPositionInputs(IN.positionOS.xyz);
+                VertexNormalInputs nrm  = GetVertexNormalInputs(IN.normalOS);
+                
+                // Expand the position along the normal for outline
+                float3 posWS = pos.positionWS + nrm.normalWS * _OutlineWidth;
+                o.positionCS = TransformWorldToHClip(posWS);
+                
+                return o;
+            }
+
+            half4 OutlineFrag(Varyings i) : SV_Target
+            {
+                return _OutlineColor;
             }
             ENDHLSL
         }
