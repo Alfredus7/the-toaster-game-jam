@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     [Header("Nivel que desbloquea al completar este")]
     public int nextLevelToUnlock = -1;
 
+    [Header("cuadro de dialogo")]
+    public GameObject DialogStart;
+    public GameObject DialogFinish;
+    public GameObject DefeatPanel; // ✅ Nuevo panel de derrota
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -35,6 +40,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateProgressUIImmediate();
+        DialogStart.gameObject.SetActive(true);
+
+        // ✅ Asegurar que el panel de derrota esté oculto al inicio
+        if (DefeatPanel != null)
+            DefeatPanel.SetActive(false);
     }
 
     public void ObjectRepaired()
@@ -72,10 +82,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerCanMove()
+    public void SetPlayerCanMove(bool canMove)
     {
         if (playerMovement != null)
-            playerMovement.canMove = !playerMovement.canMove;
+            playerMovement.canMove = canMove;
     }
 
     public void ResetProgress()
@@ -83,11 +93,49 @@ public class GameManager : MonoBehaviour
         repairedObjectsCount = 0;
         UpdateProgressUIImmediate();
     }
-    //in gamemanager in levels
+
+    // ✅ Nuevo método para manejar derrota del jugador
+    public void OnPlayerDefeat()
+    {
+        Debug.Log("💀 Jugador derrotado");
+
+        // Parar el tiempo del juego
+        Time.timeScale = 0f;
+
+        // Mostrar panel de derrota
+        if (DefeatPanel != null)
+            DefeatPanel.SetActive(true);
+
+        // Desactivar movimiento del jugador
+        SetPlayerCanMove(false);
+    }
+
+    // ✅ Método para reiniciar nivel después de derrota
+    public void RestartLevel()
+    {
+        // Reanudar tiempo
+        Time.timeScale = 1f;
+
+        // Ocultar panel de derrota
+        if (DefeatPanel != null)
+            DefeatPanel.SetActive(false);
+
+        // Reactivar movimiento
+        SetPlayerCanMove(true);
+
+        // Reiniciar progreso
+        ResetProgress();
+
+        // Reiniciar fails
+        FailsLimit failsLimit = FindObjectOfType<FailsLimit>();
+        if (failsLimit != null)
+            failsLimit.ResetFails();
+    }
+
     public void OnLevelComplete()
     {
         Debug.Log("🏁 Nivel completado.");
-
+        DialogFinish.gameObject.SetActive(true);
         if (nextLevelToUnlock >= 0 && LevelProgressManager.Instance != null)
         {
             LevelProgressManager.Instance.UnlockLevel(nextLevelToUnlock);

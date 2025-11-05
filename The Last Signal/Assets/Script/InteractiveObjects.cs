@@ -1,13 +1,13 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractiveObject : MonoBehaviour
 {
     [Header("Configuración Outline")]
     [SerializeField] private Color highlightColor = Color.yellow;
 
-    [Header("Puzzle o Panel UI")]
-    [SerializeField] private GameObject puzzleUI; // Panel a abrir
+    [Header("Evento al Interactuar")]
+    public UnityEvent OnInteract; // Evento a ejecutar
 
     private Renderer rend;
     private MaterialPropertyBlock propBlock;
@@ -56,22 +56,16 @@ public class InteractiveObject : MonoBehaviour
     public void Interact()
     {
         if (!isPlayerInside || !canInteract) return;
-
-        if (puzzleUI != null)
-        {
-            canInteract = false;
-            puzzleUI.SetActive(true);
-            SetOutlineColor(originalColor);
-        }
-        else
-        {
-            Debug.LogWarning($"[InteractiveObject] No hay puzzle UI asignado en {name}");
-        }
+        // Ejecutar el evento en vez de abrir UI
+        OnInteract?.Invoke();
+        // Opcional: deshabilitar interacción después de usar
+        canInteract = false;
+        SetOutlineColor(originalColor);
     }
 
-    public void setCanInteract(bool caninteract)
+    public void SetCanInteract(bool canInteract)
     {
-        canInteract = caninteract;
+        this.canInteract = canInteract;
     }
 
     private void SetOutlineColor(Color color)

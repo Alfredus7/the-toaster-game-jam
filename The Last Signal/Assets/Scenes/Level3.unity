@@ -3425,6 +3425,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2022433275373573545, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532709835553123863, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3906930821130592232, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_Name
       value: Camera y effects
