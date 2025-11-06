@@ -11222,15 +11222,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4690285497123478703, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_Color.b
-      value: 0.17188618
+      value: 0.15172414
       objectReference: {fileID: 0}
     - target: {fileID: 4690285497123478703, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_Color.g
-      value: 0.24951218
+      value: 0.22068967
       objectReference: {fileID: 0}
     - target: {fileID: 4690285497123478703, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_Color.r
-      value: 0.341
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5214067079554337321, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: Target.TrackingTarget
@@ -11441,13 +11441,57 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 1093255284}
+    - target: {fileID: 6819821832543371443, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00012207031
+      objectReference: {fileID: 0}
+    - target: {fileID: 6853957774299056015, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -39.999695
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5930363917366729138}
+    - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1931208827}
     - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
       propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 1931208827}
+    - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetLightRepaired
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MusicController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: RepairableLight, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122314845421368559, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7825560377087523411, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
       propertyPath: m_Name
       value: UI In Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 8117047985408576489, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -39.999695
       objectReference: {fileID: 0}
     - target: {fileID: 8904314075204281682, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
       propertyPath: playerMovement
@@ -11458,6 +11502,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+--- !u!114 &5930363917366729138 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8461608086762327447, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+  m_PrefabInstance: {fileID: 5930363917366729137}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc4f710de809fd448d69341ddbb55ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &8081201316127130273
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class TimerManager: MonoBehaviour
+public class TimerManager : MonoBehaviour
 {
     [Header("UI References")]
     public TextMeshProUGUI timerText;
@@ -9,6 +9,10 @@ public class TimerManager: MonoBehaviour
 
     [Header("Time Settings")]
     public float timeLimit = 180f; // 3 minutos por defecto
+
+    [Header("Color Settings")]
+    public Color runningColor = Color.white;
+    public Color pausedColor = Color.yellow;
 
     private float timeRemaining;
     private bool isRunning = false;
@@ -25,16 +29,23 @@ public class TimerManager: MonoBehaviour
         if (timeRemaining <= 0f)
         {
             timeRemaining = 0f;
-            ActivateDeathPanel();
+            ActivateDefeatPanel();
         }
     }
 
     void UpdateUI()
     {
-        // Format time as 00:00
+        if (!isRunning)
+        {
+            timerText.color = pausedColor;
+        }
+        else
+        {
+            // Tiempo corriendo en color blanco
+            timerText.color = runningColor;
+        }
         int minutes = Mathf.FloorToInt(timeRemaining / 60f);
         int seconds = Mathf.FloorToInt(timeRemaining % 60f);
-
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
@@ -61,6 +72,8 @@ public class TimerManager: MonoBehaviour
         // Desactivar movimiento del jugador
         if (GameManager.Instance != null)
             GameManager.Instance.SetPlayerCanMove(false);
+
+        UpdateUI(); // Actualizar UI para cambiar color
     }
 
     // Método para reanudar el temporizador (después de puzzles)
@@ -71,16 +84,14 @@ public class TimerManager: MonoBehaviour
         // Activar movimiento del jugador
         if (GameManager.Instance != null)
             GameManager.Instance.SetPlayerCanMove(true);
+
+        UpdateUI(); // Actualizar UI para cambiar color
     }
 
-    void ActivateDeathPanel()
+    void ActivateDefeatPanel()
     {
         isRunning = false;
         deathPanel.SetActive(true);
         Time.timeScale = 0f;
-
-        // Desactivar movimiento del jugador al morir
-        if (GameManager.Instance != null)
-            GameManager.Instance.SetPlayerCanMove(false);
     }
 }
