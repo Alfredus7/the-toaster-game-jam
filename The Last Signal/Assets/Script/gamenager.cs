@@ -110,28 +110,6 @@ public class GameManager : MonoBehaviour
         SetPlayerCanMove(false);
     }
 
-    // ✅ Método para reiniciar nivel después de derrota
-    public void RestartLevel()
-    {
-        // Reanudar tiempo
-        Time.timeScale = 1f;
-
-        // Ocultar panel de derrota
-        if (DefeatPanel != null)
-            DefeatPanel.SetActive(false);
-
-        // Reactivar movimiento
-        SetPlayerCanMove(true);
-
-        // Reiniciar progreso
-        ResetProgress();
-
-        // Reiniciar fails
-        FailsLimit failsLimit = FindObjectOfType<FailsLimit>();
-        if (failsLimit != null)
-            failsLimit.ResetFails();
-    }
-
     public void OnLevelComplete()
     {
         Debug.Log("🏁 Nivel completado.");
