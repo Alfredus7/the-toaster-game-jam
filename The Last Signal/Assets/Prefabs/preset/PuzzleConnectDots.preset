@@ -82,11 +82,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-    value: GameManager, Assembly-CSharp
+    value: MusicController, Assembly-CSharp
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-    value: SetPlayerCanMove
+    value: PlayMusic
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -114,7 +114,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -126,11 +126,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-    value: MusicManager, Assembly-CSharp
+    value: TimerManager, Assembly-CSharp
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-    value: PlayMusic
+    value: StopTimer
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -214,7 +214,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.size
-    value: 1
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -258,6 +258,50 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+    value: FailsLimit, Assembly-CSharp
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+    value: ReduceFail
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    value: UnityEngine.Object, UnityEngine
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+    value: Fails
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: OnPuzzleFail.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -310,7 +354,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.size
-    value: 6
+    value: 5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -318,11 +362,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-    value: GameManager, Assembly-CSharp
+    value: TimerManager, Assembly-CSharp
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-    value: ObjectRepaired
+    value: PlayTimer
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -350,7 +394,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -362,11 +406,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-    value: GameManager, Assembly-CSharp
+    value: MusicController, Assembly-CSharp
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-    value: SetPlayerCanMove
+    value: StopMusic
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -406,11 +450,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-    value: MusicManager, Assembly-CSharp
+    value: RepairableLight, Assembly-CSharp
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-    value: StopMusic
+    value: SetLightRepaired
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -454,7 +498,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-    value: SetLightRepaired
+    value: SetLightFail
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
@@ -494,15 +538,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-    value: RepairableLight, Assembly-CSharp
+    value: InteractiveObject, Assembly-CSharp
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-    value: SetLightFail
+    value: SetCanInteract
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-    value: 1
+    value: 6
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgument
@@ -530,50 +574,6 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
-    value: 2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Target
-    value: 
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
-    value: InteractiveObject, Assembly-CSharp
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
-    value: setCanInteract
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
-    value: 6
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgument
-    value: 
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
-    value: UnityEngine.Object, UnityEngine
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_IntArgument
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_FloatArgument
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_StringArgument
-    value: 
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_BoolArgument
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
     value: 2
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
