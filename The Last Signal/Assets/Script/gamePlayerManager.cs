@@ -2,9 +2,9 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GamePlayerManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static GamePlayerManager Instance { get; private set; }
 
     [Header("Jugador")]
     public TopDownMovement playerMovement;

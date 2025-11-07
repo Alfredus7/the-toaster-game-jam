@@ -199,6 +199,6 @@ public class DialogueManager : MonoBehaviour
         OnDialogueEnd?.Invoke();
 
         this.gameObject.SetActive(false);
-        // Aquí puedes ocultar el panel o notificar al GameManager
+        // Aquí puedes ocultar el panel o notificar al GamePlayerManager
     }
 }

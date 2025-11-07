@@ -235,7 +235,7 @@ public class PuzzleConnectDots : MonoBehaviour
     private void OnPuzzleCompleted()
     {
         OnPuzzleEnd?.Invoke();
-        GameManager.Instance.ObjectRepaired();
+        GamePlayerManager.Instance.ObjectRepaired();
         gameObject.SetActive(false);
     }
 

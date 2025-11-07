@@ -70,9 +70,9 @@ public class FailsLimit : MonoBehaviour
     {
         isDefeated = true;
 
-        // Llamar al GameManager para manejar la derrota
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnPlayerDefeat();
+        // Llamar al GamePlayerManager para manejar la derrota
+        if (GamePlayerManager.Instance != null)
+            GamePlayerManager.Instance.OnPlayerDefeat();
 
         Debug.Log("❌ Derrota - Límite de fails alcanzado");
     }

@@ -49,7 +49,7 @@ public class TimerManager : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    // Método para iniciar el temporizador
+    // Mï¿½todo para iniciar el temporizador
     public void StartTimer()
     {
         timeRemaining = timeLimit;
@@ -58,32 +58,32 @@ public class TimerManager : MonoBehaviour
         Time.timeScale = 1f;
 
         // Activar movimiento del jugador
-        if (GameManager.Instance != null)
-            GameManager.Instance.SetPlayerCanMove(true);
+        if (GamePlayerManager.Instance != null)
+            GamePlayerManager.Instance.SetPlayerCanMove(true);
 
         UpdateUI();
     }
 
-    // Método para pausar el temporizador (usar en puzzles)
+    // Mï¿½todo para pausar el temporizador (usar en puzzles)
     public void StopTimer()
     {
         isRunning = false;
 
         // Desactivar movimiento del jugador
-        if (GameManager.Instance != null)
-            GameManager.Instance.SetPlayerCanMove(false);
+        if (GamePlayerManager.Instance != null)
+            GamePlayerManager.Instance.SetPlayerCanMove(false);
 
         UpdateUI(); // Actualizar UI para cambiar color
     }
 
-    // Método para reanudar el temporizador (después de puzzles)
+    // Mï¿½todo para reanudar el temporizador (despuï¿½s de puzzles)
     public void PlayTimer()
     {
         isRunning = true;
 
         // Activar movimiento del jugador
-        if (GameManager.Instance != null)
-            GameManager.Instance.SetPlayerCanMove(true);
+        if (GamePlayerManager.Instance != null)
+            GamePlayerManager.Instance.SetPlayerCanMove(true);
 
         UpdateUI(); // Actualizar UI para cambiar color
     }
