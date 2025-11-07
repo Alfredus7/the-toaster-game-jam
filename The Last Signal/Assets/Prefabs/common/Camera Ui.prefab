@@ -155,7 +155,7 @@ Transform:
   m_GameObject: {fileID: 2124364639119027738}
   serializedVersion: 2
   m_LocalRotation: {x: 0.27781588, y: 0.36497167, z: -0.1150751, w: 0.8811196}
-  m_LocalPosition: {x: 2.3847656, y: 7.735763, z: -25.657722}
+  m_LocalPosition: {x: -6.90981, y: 7.7357626, z: -29.641268}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -732,6 +732,10 @@ PrefabInstance:
       propertyPath: currentDialogue
       value: 
       objectReference: {fileID: 11400000, guid: e59685fc24de1b9489e6fc32a412b089, type: 2}
+    - target: {fileID: 636725419538995809, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: OnDialogueEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 636725419538995809, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
       propertyPath: OnDialogueEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -1930,6 +1934,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8811595105548858436, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
       propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811667576311922593, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8890085988555119649, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}

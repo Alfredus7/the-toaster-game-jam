@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8638333433234675356}
   - component: {fileID: 7972473610724009841}
-  - component: {fileID: 4019694590408295229}
   m_Layer: 5
   m_Name: healht
   m_TagString: Untagged
@@ -64,25 +63,6 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 3
---- !u!114 &4019694590408295229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785865493010860247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2276ff2bef91d74cba809565252c419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  maxFails: 3
-  failLights:
-  - {fileID: 2600338158114929065}
-  - {fileID: 8696880134143246343}
-  - {fileID: 5059119556720399920}
-  greenColor: {r: 0, g: 1, b: 0.4980392, a: 1}
-  redColor: {r: 0.6470588, g: 0.1647059, b: 0.1647059, a: 1}
 --- !u!1 &822151953084038345
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7349257099200265026}
   - component: {fileID: 4864590611888640597}
+  - component: {fileID: 6357734065031521946}
   m_Layer: 5
   m_Name: Puzzle x5
   m_TagString: Untagged
@@ -1088,6 +1069,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &6357734065031521946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6123758011276827111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2276ff2bef91d74cba809565252c419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  maxFails: 3
+  failLights:
+  - {fileID: 2600338158114929065}
+  - {fileID: 8696880134143246343}
+  - {fileID: 5059119556720399920}
+  greenColor: {r: 0, g: 1, b: 0.4980392, a: 1}
+  redColor: {r: 0.6470588, g: 0.1647059, b: 0.1647059, a: 1}
+  onMaxFailsReached:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6914260013433320687
 GameObject:
   m_ObjectHideFlags: 0

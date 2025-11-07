@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class FailsLimit : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class FailsLimit : MonoBehaviour
     [SerializeField] private Image[] failLights; // Array de los 3 focos verdes
     [SerializeField] private Color greenColor = Color.green;
     [SerializeField] private Color redColor = Color.red;
+
+    [Header("Eventos")]
+    public UnityEvent onMaxFailsReached; // Se invoca cuando se alcanza el máximo de fails
 
     private int currentFails;
     private bool isDefeated = false;
@@ -70,17 +74,11 @@ public class FailsLimit : MonoBehaviour
     {
         isDefeated = true;
 
-        // Llamar al GamePlayerManager para manejar la derrota
-        if (GamePlayerManager.Instance != null)
-            GamePlayerManager.Instance.OnPlayerDefeat();
-
+        // Invocar el evento de máximo fails alcanzado
+        onMaxFailsReached?.Invoke();
         Debug.Log("❌ Derrota - Límite de fails alcanzado");
-    }
-
-    // Método para reiniciar los fails (por si necesitas resetear el puzzle)
-    public void ResetFails()
-    {
         InitializeFails();
+        gameObject.SetActive(false);
     }
 
     // Método para obtener fails actuales

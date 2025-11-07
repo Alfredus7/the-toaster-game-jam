@@ -941,7 +941,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4890798136567955615}
   - component: {fileID: 2785415317152413021}
-  - component: {fileID: 8340012615803930777}
   m_Layer: 5
   m_Name: healht
   m_TagString: Untagged
@@ -995,25 +994,6 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 3
---- !u!114 &8340012615803930777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4820503204306463191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2276ff2bef91d74cba809565252c419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  maxFails: 3
-  failLights:
-  - {fileID: 9153227299424880196}
-  - {fileID: 9115864312219780810}
-  - {fileID: 5239089648103822013}
-  greenColor: {r: 0, g: 1, b: 0.4980392, a: 1}
-  redColor: {r: 0.6470588, g: 0.1647059, b: 0.1647059, a: 1}
 --- !u!1 &5984694369424617241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,6 +1155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1571105544737116525}
   - component: {fileID: 6310140790553653919}
+  - component: {fileID: 6153901795429932893}
   m_Layer: 5
   m_Name: Puzzle x3
   m_TagString: Untagged
@@ -1283,7 +1264,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8340012615803930777}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FailsLimit, Assembly-CSharp
         m_MethodName: ReduceFail
         m_Mode: 1
@@ -1373,6 +1354,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &6153901795429932893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7287138261376060138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2276ff2bef91d74cba809565252c419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  maxFails: 3
+  failLights:
+  - {fileID: 9153227299424880196}
+  - {fileID: 9115864312219780810}
+  - {fileID: 5239089648103822013}
+  greenColor: {r: 0, g: 1, b: 0.4980392, a: 1}
+  redColor: {r: 0.6470588, g: 0.1647059, b: 0.1647059, a: 1}
+  onMaxFailsReached:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &434038153562187274
 PrefabInstance:
   m_ObjectHideFlags: 0
