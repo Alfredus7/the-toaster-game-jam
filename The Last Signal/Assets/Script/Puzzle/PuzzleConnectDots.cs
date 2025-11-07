@@ -138,10 +138,11 @@ public class PuzzleConnectDots : MonoBehaviour
 
         if (paths[currentColor].Last().type == Cell.CellType.End)
         {
+            CheckPuzzleProgress();
             ShowMessage("¡Conexión establecida!");
             OnPuzzleConectNode?.Invoke(); // ✅ Evento de conexión invocado
             isDrawing = false;
-            CheckPuzzleProgress();
+            
         }
         else FailPath("Ruta inválida. Reiniciando...");
     }
