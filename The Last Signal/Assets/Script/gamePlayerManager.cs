@@ -25,7 +25,6 @@ public class GamePlayerManager : MonoBehaviour
     [Header("cuadro de dialogo")]
     public GameObject DialogStart;
     public GameObject DialogFinish;
-    public GameObject DefeatPanel; // ✅ Nuevo panel de derrota
 
     private void Awake()
     {
@@ -41,10 +40,6 @@ public class GamePlayerManager : MonoBehaviour
     {
         UpdateProgressUIImmediate();
         DialogStart.gameObject.SetActive(true);
-
-        // ✅ Asegurar que el panel de derrota esté oculto al inicio
-        if (DefeatPanel != null)
-            DefeatPanel.SetActive(false);
     }
 
     public void ObjectRepaired()
@@ -92,22 +87,6 @@ public class GamePlayerManager : MonoBehaviour
     {
         repairedObjectsCount = 0;
         UpdateProgressUIImmediate();
-    }
-
-    // ✅ Nuevo método para manejar derrota del jugador
-    public void OnPlayerDefeat()
-    {
-        Debug.Log("💀 Jugador derrotado");
-
-        // Parar el tiempo del juego
-        Time.timeScale = 0f;
-
-        // Mostrar panel de derrota
-        if (DefeatPanel != null)
-            DefeatPanel.SetActive(true);
-
-        // Desactivar movimiento del jugador
-        SetPlayerCanMove(false);
     }
 
     public void OnLevelComplete()

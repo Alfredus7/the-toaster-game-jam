@@ -6,7 +6,7 @@ public class InteractionIndicator : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private TextMeshPro indicatorText;
 
-    [Header("Configuración")]
+    [Header("Configuraciï¿½n")]
     [SerializeField] private string keyToPress = "E";
 
     void Start()

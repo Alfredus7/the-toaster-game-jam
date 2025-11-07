@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 505919055808792383, guid: f632e25329fbde448877461a2b0eef96, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ee4c52dc386282543acab545ce9c98c9, type: 3}
     - target: {fileID: 1233669750536103337, guid: f632e25329fbde448877461a2b0eef96, type: 3}
       propertyPath: m_fontSize
       value: 60
@@ -424,6 +428,10 @@ PrefabInstance:
     - target: {fileID: 4387945258140416178, guid: f632e25329fbde448877461a2b0eef96, type: 3}
       propertyPath: m_RenderMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387945258140416178, guid: f632e25329fbde448877461a2b0eef96, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4610938837357737655, guid: f632e25329fbde448877461a2b0eef96, type: 3}
       propertyPath: m_AnchorMax.y

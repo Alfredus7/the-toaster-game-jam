@@ -21,4 +21,13 @@ public class SceneLoader : MonoBehaviour
         Application.Quit();
         Debug.Log("El juego se ha cerrado."); // Solo visible en el Editor
     }
+
+
+    // Reiniciar la escena actual
+    public void ReloadScene()
+    {
+        Time.timeScale = 1.0f;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
 }
