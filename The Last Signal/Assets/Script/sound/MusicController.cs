@@ -5,10 +5,13 @@ public class MusicController : MonoBehaviour
 {
     [Header("Configuracion de Musica")]
     public AudioSource musicSource;
+    public AudioClip musicAction;
+    public AudioClip musicAmbiental;
     public float fadeDuration = 2.0f;
 
     private float originalVolume;
     private Coroutine currentFadeCoroutine;
+    private AudioClip currentClip;
 
     void Start()
     {
@@ -16,13 +19,41 @@ public class MusicController : MonoBehaviour
         {
             originalVolume = musicSource.volume;
             musicSource.volume = 0f; // Empezar con volumen en 0
+
+            // Reproducir música ambiental automáticamente al inicio
+            if (musicAmbiental != null)
+            {
+                PlayMusicAmbiental();
+            }
         }
     }
 
-    // M�todo para iniciar m�sica con fade in suave
-    public void PlayMusic()
+    // Método para reproducir música de acción con fade
+    public void PlayMusicAction()
     {
-        if (musicSource == null) return;
+        if (musicSource == null || musicAction == null) return;
+
+        // Si ya está reproduciendo la misma canción, no hacer nada
+        if (currentClip == musicAction && musicSource.isPlaying) return;
+
+        PlayMusic(musicAction);
+    }
+
+    // Método para reproducir música ambiental con fade
+    public void PlayMusicAmbiental()
+    {
+        if (musicSource == null || musicAmbiental == null) return;
+
+        // Si ya está reproduciendo la misma canción, no hacer nada
+        if (currentClip == musicAmbiental && musicSource.isPlaying) return;
+
+        PlayMusic(musicAmbiental);
+    }
+
+    // Método genérico para cambiar de música con fade
+    private void PlayMusic(AudioClip newClip)
+    {
+        if (musicSource == null || newClip == null) return;
 
         // Detener fade actual si existe
         if (currentFadeCoroutine != null)
@@ -30,10 +61,46 @@ public class MusicController : MonoBehaviour
             StopCoroutine(currentFadeCoroutine);
         }
 
-        currentFadeCoroutine = StartCoroutine(FadeInCoroutine());
+        currentFadeCoroutine = StartCoroutine(FadeToNewClipCoroutine(newClip));
     }
 
-    // M�todo para detener m�sica con fade out suave
+    // Corrutina para fade entre canciones
+    private IEnumerator FadeToNewClipCoroutine(AudioClip newClip)
+    {
+        // Fade Out de la canción actual si está sonando
+        if (musicSource.isPlaying)
+        {
+            float elapsedTime = 0f;
+            float startVolume = musicSource.volume;
+
+            while (elapsedTime < fadeDuration / 2f)
+            {
+                elapsedTime += Time.deltaTime;
+                musicSource.volume = Mathf.Lerp(startVolume, 0f, elapsedTime / (fadeDuration / 2f));
+                yield return null;
+            }
+
+            musicSource.volume = 0f;
+        }
+
+        // Cambiar el clip y hacer Fade In
+        musicSource.clip = newClip;
+        currentClip = newClip;
+        musicSource.Play();
+
+        float fadeInTime = 0f;
+        while (fadeInTime < fadeDuration / 2f)
+        {
+            fadeInTime += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(0f, originalVolume, fadeInTime / (fadeDuration / 2f));
+            yield return null;
+        }
+
+        musicSource.volume = originalVolume;
+        currentFadeCoroutine = null;
+    }
+
+    // Método para detener música con fade out
     public void StopMusic()
     {
         if (musicSource == null || !musicSource.isPlaying) return;
@@ -44,28 +111,6 @@ public class MusicController : MonoBehaviour
         }
 
         currentFadeCoroutine = StartCoroutine(FadeOutCoroutine());
-    }
-
-    // Corrutina para Fade In suave
-    private IEnumerator FadeInCoroutine()
-    {
-        if (!musicSource.isPlaying)
-        {
-            musicSource.volume = 0f;
-            musicSource.Play();
-        }
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < fadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            musicSource.volume = Mathf.Lerp(0f, originalVolume, elapsedTime / fadeDuration);
-            yield return null;
-        }
-
-        musicSource.volume = originalVolume;
-        currentFadeCoroutine = null;
     }
 
     // Corrutina para Fade Out suave
@@ -83,6 +128,23 @@ public class MusicController : MonoBehaviour
 
         musicSource.volume = 0f;
         musicSource.Stop();
+        currentClip = null;
         currentFadeCoroutine = null;
+    }
+
+    // Métodos para verificar qué música está sonando
+    public bool IsPlayingAction()
+    {
+        return currentClip == musicAction && musicSource.isPlaying;
+    }
+
+    public bool IsPlayingAmbiental()
+    {
+        return currentClip == musicAmbiental && musicSource.isPlaying;
+    }
+
+    public bool IsMusicPlaying()
+    {
+        return musicSource.isPlaying;
     }
 }

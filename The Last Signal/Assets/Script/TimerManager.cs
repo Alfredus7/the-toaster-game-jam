@@ -1,11 +1,11 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class TimerManager : MonoBehaviour
 {
     [Header("UI References")]
     public TextMeshProUGUI timerText;
-    public GameObject deathPanel;
 
     [Header("Time Settings")]
     public float timeLimit = 180f; // 3 minutos por defecto
@@ -13,6 +13,9 @@ public class TimerManager : MonoBehaviour
     [Header("Color Settings")]
     public Color runningColor = Color.white;
     public Color pausedColor = Color.yellow;
+
+    [Header("Events")]
+    public UnityEvent OnTimeExpired;
 
     private float timeRemaining;
     private bool isRunning = false;
@@ -29,7 +32,8 @@ public class TimerManager : MonoBehaviour
         if (timeRemaining <= 0f)
         {
             timeRemaining = 0f;
-            ActivateDefeatPanel();
+            isRunning = false;
+            OnTimeExpired?.Invoke();
         }
     }
 
@@ -49,13 +53,11 @@ public class TimerManager : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    // M�todo para iniciar el temporizador
+    // Método para iniciar el temporizador
     public void StartTimer()
     {
         timeRemaining = timeLimit;
         isRunning = true;
-        deathPanel.SetActive(false);
-        Time.timeScale = 1f;
 
         // Activar movimiento del jugador
         if (GamePlayerManager.Instance != null)
@@ -64,7 +66,7 @@ public class TimerManager : MonoBehaviour
         UpdateUI();
     }
 
-    // M�todo para pausar el temporizador (usar en puzzles)
+    // Método para pausar el temporizador (usar en puzzles)
     public void StopTimer()
     {
         isRunning = false;
@@ -76,7 +78,7 @@ public class TimerManager : MonoBehaviour
         UpdateUI(); // Actualizar UI para cambiar color
     }
 
-    // M�todo para reanudar el temporizador (despu�s de puzzles)
+    // Método para reanudar el temporizador (después de puzzles)
     public void PlayTimer()
     {
         isRunning = true;
@@ -86,12 +88,5 @@ public class TimerManager : MonoBehaviour
             GamePlayerManager.Instance.SetPlayerCanMove(true);
 
         UpdateUI(); // Actualizar UI para cambiar color
-    }
-
-    void ActivateDefeatPanel()
-    {
-        isRunning = false;
-        deathPanel.SetActive(true);
-        Time.timeScale = 0f;
     }
 }

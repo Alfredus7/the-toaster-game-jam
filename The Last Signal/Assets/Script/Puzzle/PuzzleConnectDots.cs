@@ -23,20 +23,21 @@ public class PuzzleConnectDots : MonoBehaviour
     private Dictionary<Color, List<Cell>> paths = new Dictionary<Color, List<Cell>>();
     private Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
     private float neighborThreshold = 1.1f;
-
-    private void Start() => InitializePuzzle();
+    private void OnEnable() => InitializePuzzle();
 
     private void InitializePuzzle()
     {
         cells = gridParent?.Cast<Transform>()
-                        .Select(t => t.GetComponent<Cell>())
-                        .Where(c => c != null).ToList() ?? cells;
-
+                       .Select(t => t.GetComponent<Cell>())
+                       .Where(c => c != null).ToList() ?? cells;
         ClearMessage();
         ApplySpritesToCells();
         cells.ForEach(cell => cell.Init(this, InBlankColor));
         OnPuzzleStart?.Invoke();
     }
+
+   
+
 
     private void ApplySpritesToCells()
     {

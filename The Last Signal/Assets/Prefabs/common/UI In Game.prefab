@@ -2256,6 +2256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   musicSource: {fileID: 4911403752833846438}
+  musicAction: {fileID: 8300000, guid: a7e89063f4b27b34c9ab8f3635769e3e, type: 3}
+  musicAmbiental: {fileID: 8300000, guid: 9e06cf219595fe14698eb5f34c45c9be, type: 3}
   fadeDuration: 1
 --- !u!82 &4911403752833846438
 AudioSource:
