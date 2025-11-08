@@ -21,8 +21,6 @@ public class LevelMenuController : MonoBehaviour
     [Header("UI de diálogo introductorio")]
     public GameObject Dialog;
 
-    private const string IntroDialogKey = "IntroDialogShown";
-
     private void Start()
     {
         if (LevelProgressManager.Instance == null)
@@ -33,14 +31,16 @@ public class LevelMenuController : MonoBehaviour
 
         UpdateLevelEntries();
 
-        if (!IsIntroDialogShown())
+        // Mostrar diálogo solo si el nivel 1 NO está desbloqueado
+        if (!LevelProgressManager.Instance.IsLevelUnlocked(1))
         {
-            Debug.Log("🗨️ Mostrando diálogo introductorio...");
+            Debug.Log("🗨️ Mostrando diálogo introductorio (nivel 1 no desbloqueado)...");
             Dialog.SetActive(true);
         }
         else
         {
-            Debug.Log("ℹ️ El diálogo ya fue mostrado antes.");
+            Debug.Log("ℹ️ Nivel 1 ya está desbloqueado, no se muestra diálogo.");
+            Dialog.SetActive(false);
         }
     }
 
@@ -59,21 +59,15 @@ public class LevelMenuController : MonoBehaviour
         }
     }
 
-    private bool IsIntroDialogShown()
-    {
-        return PlayerPrefs.GetInt(IntroDialogKey, 0) == 1;
-    }
-    // Desbloquear Nivel 1 con  dialogo introductorio
+    // Desbloquear Nivel 1 al terminar el diálogo introductorio
     public void EndDialog()
     {
-        PlayerPrefs.SetInt(IntroDialogKey, 1);
-        PlayerPrefs.Save();
-
-        
         LevelProgressManager.Instance.UnlockLevel(1);
-        Debug.Log("📜 Diálogo introductorio mostrado, nivel 1 desbloqueado.");
+        Debug.Log("📜 Diálogo introductorio completado, nivel 1 desbloqueado.");
 
         UpdateLevelEntries();
+
+        // Opcional: cerrar el diálogo después de desbloquear
+        Dialog.SetActive(false);
     }
 }
-

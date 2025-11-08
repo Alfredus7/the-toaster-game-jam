@@ -21,7 +21,12 @@ public class SceneLoader : MonoBehaviour
         Application.Quit();
         Debug.Log("El juego se ha cerrado."); // Solo visible en el Editor
     }
-
+    // En MenuConfigUI, agrega este métdo
+    public void ResetProgress()
+    {
+        LevelProgressManager.Instance.ResetLevelProgress();
+        Debug.Log("Progreso reiniciado");
+    }
 
     // Reiniciar la escena actual
     public void ReloadScene()

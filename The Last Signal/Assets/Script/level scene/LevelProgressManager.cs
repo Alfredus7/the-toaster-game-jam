@@ -17,6 +17,7 @@ public class LevelProgressManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject);
         LoadProgress();
     }
 
@@ -52,5 +53,19 @@ public class LevelProgressManager : MonoBehaviour
             SaveProgress();
             Debug.Log($"✅ Nivel {levelID} desbloqueado.");
         }
+    }
+
+    public void ResetLevelProgress()
+    {
+        // Limpiar el HashSet local
+        unlockedLevels.Clear();
+
+        // Asegurar que al menos el nivel 0 esté desbloqueado (como en tu inicialización)
+        unlockedLevels.Add(0);
+
+        // Guardar el progreso resetado
+        SaveProgress();
+
+        Debug.Log("🔄 Progreso de niveles reiniciado. Solo nivel 0 desbloqueado.");
     }
 }

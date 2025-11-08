@@ -3249,10 +3249,10 @@ RectTransform:
   - {fileID: 4743591323883123112}
   - {fileID: 4848530908637722440}
   - {fileID: 4562565318215734666}
-  - {fileID: 1788944851102106864}
   - {fileID: 2890526207857567838}
   - {fileID: 3389784263544033899}
   - {fileID: 3019100214431431318}
+  - {fileID: 1788944851102106864}
   - {fileID: 7542325612036368240}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3279,7 +3279,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
