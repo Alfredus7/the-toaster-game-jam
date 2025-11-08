@@ -11,7 +11,7 @@ public class InteractiveObject : MonoBehaviour
     public UnityEvent OnInteract;
 
     [Header("Configuración Reactivación")]
-    [SerializeField] private float reactivationTime = 5f;
+   private float reactivationTime = 10f;
 
     private Renderer rend;
     private MaterialPropertyBlock propBlock;

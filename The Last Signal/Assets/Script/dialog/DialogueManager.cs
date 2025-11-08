@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections;
-using UnityEngine.Events; // ← necesario para UnityEvent
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -14,21 +14,20 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Configuración")]
     public DialogueSequence currentDialogue;
-    public float typingSpeed = 0.03f; // velocidad de escritura (segundos por letra)
-    public float autoDelay = 1f; // tiempo de espera antes de pasar automáticamente (modo auto)
+    public float typingSpeed = 0.03f;
+    public float autoDelay = 1f;
 
     [Header("Eventos")]
-    public UnityEvent OnDialogueEnd; // ← se dispara al finalizar el diálogo
+    public UnityEvent OnDialogueEnd;
 
     private int currentIndex = 0;
     private bool isActive = false;
     private bool isTyping = false;
-    private bool autoMode = false; // ← modo automático
+    private bool autoMode = false;
     private string fullText;
     private Coroutine typingCoroutine;
     private Coroutine autoCoroutine;
     private Material defaultMaterial;
-
 
     void Start()
     {
@@ -77,42 +76,23 @@ public class DialogueManager : MonoBehaviour
             characterImage.material = defaultMaterial;
         }
 
-        // Escribir texto con efecto
+        // Usar la utilidad de typewriter
         fullText = line.text;
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(TypeText(fullText));
+
+        typingCoroutine = StartCoroutine(TypewriterUtility.TypeText(
+            fullText,
+            dialogueText,
+            typingSpeed,
+            (typing) => isTyping = typing,
+            null, // No necesitamos setFullText ya que lo manejamos localmente
+            autoMode,
+            () => {
+                if (autoMode && !isTyping)
+                    autoCoroutine = StartCoroutine(AutoAdvance());
+            }
+        ));
     }
-
-    IEnumerator TypeText(string text)
-    {
-        isTyping = true;
-        dialogueText.text = "";
-
-        foreach (char c in text)
-        {
-            dialogueText.text += c;
-
-            // Ajusta la pausa según el carácter
-            float delay = typingSpeed;
-
-            if (c == '…') delay = typingSpeed * 7f;  // pausa larga
-            else if (c == '—' || c == '-') delay = typingSpeed * 5f; // pausa media
-            else if (c == '.' || c == '!' || c == '?') delay = typingSpeed * 3f; // pausa corta
-            else if (c == ',') delay = typingSpeed * 2f; // pausa muy corta
-
-            yield return new WaitForSeconds(delay);
-        }
-
-        isTyping = false;
-
-        // Si el modo automático está activo, inicia el temporizador para pasar de línea
-        if (autoMode)
-        {
-            if (autoCoroutine != null) StopCoroutine(autoCoroutine);
-            autoCoroutine = StartCoroutine(AutoAdvance());
-        }
-    }
-
 
     IEnumerator AutoAdvance()
     {
@@ -123,15 +103,13 @@ public class DialogueManager : MonoBehaviour
     public void OnJump(InputValue value)
     {
         if (!isActive) return;
-        AdvanceLine(); // ← reutiliza el mismo comportamiento
+        AdvanceLine();
     }
 
-    // === EVENTO 1: AVANZAR ===
     public void AdvanceLine()
     {
         if (!isActive) return;
 
-        // Si todavía está escribiendo, muestra todo el texto instantáneamente
         if (isTyping)
         {
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
@@ -144,26 +122,21 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // === EVENTO 2: SALTAR TODO EL DIÁLOGO ===
     public void SkipDialogue()
     {
         if (!isActive) return;
 
-        // Cancela corutinas y cierra todo
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         if (autoCoroutine != null) StopCoroutine(autoCoroutine);
 
         EndDialogue();
     }
 
-    // === EVENTO 3: AUTO MODE ===
     public void ToggleAuto()
     {
         autoMode = !autoMode;
         Debug.Log("Modo automático: " + (autoMode ? "Activado" : "Desactivado"));
 
-        // Si está escribiendo y activas el auto, no hace nada hasta terminar de escribir
-        // Si ya terminó de escribir, comienza a avanzar automáticamente
         if (autoMode && !isTyping)
         {
             if (autoCoroutine != null) StopCoroutine(autoCoroutine);
@@ -194,11 +167,7 @@ public class DialogueManager : MonoBehaviour
         isActive = false;
         autoMode = false;
         Debug.Log("Fin del diálogo");
-
-        // 🔔 Dispara el evento para avisar a otros scripts o botones
         OnDialogueEnd?.Invoke();
-
         this.gameObject.SetActive(false);
-        // Aquí puedes ocultar el panel o notificar al GamePlayerManager
     }
 }

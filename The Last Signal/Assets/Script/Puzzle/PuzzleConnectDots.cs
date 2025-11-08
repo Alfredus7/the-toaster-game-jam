@@ -9,7 +9,7 @@ public class PuzzleConnectDots : MonoBehaviour
 {
     [Header("Configuración")]
     [SerializeField] private Transform gridParent;
-    [SerializeField] private TMP_Text messageText;
+    [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private Sprite start, empty, Fails, end, dot, path;
     [SerializeField] private Color InBlankColor = new Color(0f, 1f, 0.53f);
 
@@ -23,6 +23,12 @@ public class PuzzleConnectDots : MonoBehaviour
     private Dictionary<Color, List<Cell>> paths = new Dictionary<Color, List<Cell>>();
     private Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
     private float neighborThreshold = 1.1f;
+
+    // Para el typewriter
+    private bool isTypingMessage = false;
+    private Coroutine typingCoroutine;
+    private float messageTypingSpeed = 0.03f;
+
     private void OnEnable() => InitializePuzzle();
 
     private void InitializePuzzle()
@@ -35,9 +41,6 @@ public class PuzzleConnectDots : MonoBehaviour
         cells.ForEach(cell => cell.Init(this, InBlankColor));
         OnPuzzleStart?.Invoke();
     }
-
-   
-
 
     private void ApplySpritesToCells()
     {
@@ -75,34 +78,26 @@ public class PuzzleConnectDots : MonoBehaviour
         // Lógica para Fails (X)
         if (cell.type == Cell.CellType.Fails)
         {
-            // Si es blanco, bloquea todas las líneas
-            // Si es de color, solo bloquea la línea del mismo color
             if (!cell.HasColor() || cell.GetDotColor() == currentColor)
             {
                 FailPath("¡Cortocircuito! Ruta bloqueada");
                 return;
             }
-            // Si es de color diferente, permite el paso
         }
 
         // Lógica para Ends (cuadrados vacíos)
         if (cell.type == Cell.CellType.End)
         {
-            // Si es blanco, cualquier línea puede conectar
-            // Si es de color, solo línea del mismo color puede conectar
             if (cell.HasColor() && cell.GetDotColor() != currentColor)
             {
                 FailPath("Polaridad incorrecta en nodo final");
                 return;
             }
-            
         }
 
         // Lógica para Dots (puntos)
         if (cell.type == Cell.CellType.Dot)
         {
-            // Si es blanco, cualquier línea puede cruzar
-            // Si es de color, solo línea del mismo color puede cruzar
             if (cell.HasColor() && cell.GetDotColor() != currentColor)
             {
                 FailPath("Polaridad incorrecta en punto de paso");
@@ -130,7 +125,6 @@ public class PuzzleConnectDots : MonoBehaviour
         }
 
         paths[currentColor].Add(cell);
-       
     }
 
     public void EndDrawing(Cell cell)
@@ -141,9 +135,8 @@ public class PuzzleConnectDots : MonoBehaviour
         {
             CheckPuzzleProgress();
             ShowMessage("¡Conexión establecida!");
-            OnPuzzleConectNode?.Invoke(); // ✅ Evento de conexión invocado
+            OnPuzzleConectNode?.Invoke();
             isDrawing = false;
-            
         }
         else FailPath("Ruta inválida. Reiniciando...");
     }
@@ -154,7 +147,7 @@ public class PuzzleConnectDots : MonoBehaviour
         isLocked = true;
         isDrawing = false;
         ShowMessage(msg);
-        OnPuzzleFail?.Invoke(); // ✅ Evento de fallo invocado
+        OnPuzzleFail?.Invoke();
         Invoke(nameof(DelayedResetPuzzle), 0.5f);
     }
 
@@ -184,7 +177,6 @@ public class PuzzleConnectDots : MonoBehaviour
 
     private void CheckPuzzleProgress()
     {
-        // Verificar que todos los Starts estén conectados a Ends compatibles
         bool allSourcesConnected = cells
             .Where(c => c.type == Cell.CellType.Start)
             .All(start =>
@@ -201,19 +193,16 @@ public class PuzzleConnectDots : MonoBehaviour
             return;
         }
 
-        // Verificar que todos los Dots estén conectados por líneas compatibles
         bool allDotsConnected = cells
             .Where(c => c.type == Cell.CellType.Dot)
             .All(dot =>
             {
-                // Si el Dot es blanco, cualquier ruta que lo contenga es válida
                 if (!dot.HasColor())
                 {
                     return paths.Values.Any(p => p.Contains(dot));
                 }
                 else
                 {
-                    // Si el Dot es de color, debe estar en la ruta del mismo color
                     return paths.ContainsKey(dot.GetDotColor()) &&
                            paths[dot.GetDotColor()].Contains(dot);
                 }
@@ -243,13 +232,39 @@ public class PuzzleConnectDots : MonoBehaviour
 
     private void ShowMessage(string text)
     {
-        if (messageText == null) return;
-        messageText.text = text;
+        if (messageText == null || !gameObject.activeInHierarchy) return;
+        typeo(text);
         CancelInvoke(nameof(ClearMessage));
-        Invoke(nameof(ClearMessage), 1f);
+        Invoke(nameof(ClearMessage), 1.5f + (text.Length * messageTypingSpeed));
     }
 
-    private void ClearMessage() => messageText.text = "Conecta los nodos para reparar el circuito";
+    private void ClearMessage()
+    {
+        if (messageText == null || !gameObject.activeInHierarchy) return;
+        typeo("Conecta los nodos para reparar el circuito");
+    }
+
+    public void typeo(string text)
+    {
+        // Check if game object is active before starting coroutine
+        if (!gameObject.activeInHierarchy) return;
+
+        // Cancel typing anterior si existe
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            isTypingMessage = false;
+        }
+
+        // Usar la utilidad de typewriter
+        typingCoroutine = StartCoroutine(TypewriterUtility.TypeText(
+            text,
+            messageText,
+            messageTypingSpeed,
+            (typing) => isTypingMessage = typing
+        ));
+    }
+
     public void RefreshCells() => InitializePuzzle();
     public Color GetInBlankColor() => InBlankColor;
 }
