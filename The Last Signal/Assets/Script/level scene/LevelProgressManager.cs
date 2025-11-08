@@ -17,7 +17,6 @@ public class LevelProgressManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
         LoadProgress();
     }
 
