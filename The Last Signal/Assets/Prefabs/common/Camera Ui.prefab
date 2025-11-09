@@ -1674,7 +1674,7 @@ Transform:
   m_GameObject: {fileID: 2124364639119027738}
   serializedVersion: 2
   m_LocalRotation: {x: 0.27781588, y: 0.36497167, z: -0.1150751, w: 0.8811196}
-  m_LocalPosition: {x: -412.5323, y: -232.26424, z: -2.62228}
+  m_LocalPosition: {x: 2.3847647, y: 7.735763, z: -25.657722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1798,7 +1798,7 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
+    Style: 2
     Time: 2
     CustomCurve:
       serializedVersion: 2
@@ -3570,7 +3570,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 0
-    FarClipPlane: 30
+    FarClipPlane: 50
     Dutch: 0
     ModeOverride: 1
     PhysicalProperties:
@@ -6631,7 +6631,7 @@ PrefabInstance:
     - target: {fileID: 8461608086762327447, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
       propertyPath: musicAmbiental
       value: 
-      objectReference: {fileID: 8300000, guid: 9e06cf219595fe14698eb5f34c45c9be, type: 3}
+      objectReference: {fileID: 8300000, guid: 74aa06edbf7e92241a249ce95739b8e6, type: 3}
     - target: {fileID: 8482472146782390588, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
       propertyPath: m_Color.b
       value: 0.3411765

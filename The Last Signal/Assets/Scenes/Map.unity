@@ -603,7 +603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3384746618767140848, guid: c1fa4f9722f6e414b825f489ac42cbad, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -39.999023
+      value: -39.999084
       objectReference: {fileID: 0}
     - target: {fileID: 4061548325202216363, guid: c1fa4f9722f6e414b825f489ac42cbad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -697,6 +697,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.4980392
       objectReference: {fileID: 0}
+    - target: {fileID: 6944420360158581591, guid: c1fa4f9722f6e414b825f489ac42cbad, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 74aa06edbf7e92241a249ce95739b8e6, type: 3}
     - target: {fileID: 7485372190448912158, guid: c1fa4f9722f6e414b825f489ac42cbad, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -760,6 +764,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1501789903772753871, guid: c1fa4f9722f6e414b825f489ac42cbad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8135602332693054313}
+    - targetCorrespondingSourceObject: {fileID: 1501789903772753871, guid: c1fa4f9722f6e414b825f489ac42cbad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8135602332693054316}
   m_SourcePrefab: {fileID: 100100000, guid: c1fa4f9722f6e414b825f489ac42cbad, type: 3}
 --- !u!114 &8135602332693054311 stripped
 MonoBehaviour:
@@ -790,7 +797,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSettingsManager
   audioMixer: {fileID: 24100000, guid: acf3c57b55e1de1499d692776dbf31c9, type: 2}
-  postProcessVolume: {fileID: 0}
+  postProcessVolume: {fileID: 8135602332693054316}
+--- !u!114 &8135602332693054316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135602332693054312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: fa9df3387a596b742a624b7abe4afc67, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
