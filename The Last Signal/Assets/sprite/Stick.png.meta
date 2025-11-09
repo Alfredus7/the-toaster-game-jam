@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 3
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,10 +139,10 @@ TextureImporter:
       name: Stick_0
       rect:
         serializedVersion: 2
-        x: 30
-        y: 76
-        width: 508
-        height: 515
+        x: 25
+        y: 64
+        width: 429
+        height: 435
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,10 +161,10 @@ TextureImporter:
       name: Stick_1
       rect:
         serializedVersion: 2
-        x: 588
-        y: 12
-        width: 620
-        height: 620
+        x: 495
+        y: 10
+        width: 523
+        height: 524
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

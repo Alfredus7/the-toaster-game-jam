@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 3
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -141,7 +141,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 300
-        width: 300
+        width: 298
         height: 300
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -161,9 +161,9 @@ TextureImporter:
       name: puzzle_1
       rect:
         serializedVersion: 2
-        x: 300
+        x: 298
         y: 300
-        width: 300
+        width: 298
         height: 300
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -183,9 +183,9 @@ TextureImporter:
       name: puzzle_2
       rect:
         serializedVersion: 2
-        x: 600
+        x: 596
         y: 300
-        width: 300
+        width: 298
         height: 300
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -207,7 +207,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 300
+        width: 298
         height: 300
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -217,8 +217,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3584fed5d2a322e47952728602afc9cf
-      internalID: -1489692580
+      spriteID: ce19b934c18ee2040983d9f7a8645e47
+      internalID: 1749220282
       vertices: []
       indices: 
       edges: []
@@ -227,9 +227,9 @@ TextureImporter:
       name: puzzle_4
       rect:
         serializedVersion: 2
-        x: 300
+        x: 298
         y: 0
-        width: 300
+        width: 298
         height: 300
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -239,8 +239,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de67ca71ec39b8749b704d158455fd1f
-      internalID: 413031293
+      spriteID: b5f32280a2c449242b9caa66e3bf4658
+      internalID: 1714011417
       vertices: []
       indices: 
       edges: []
@@ -249,9 +249,9 @@ TextureImporter:
       name: puzzle_5
       rect:
         serializedVersion: 2
-        x: 600
+        x: 596
         y: 0
-        width: 300
+        width: 298
         height: 300
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -261,8 +261,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd94f962c9c991b4684dfe7625251287
-      internalID: -1226136173
+      spriteID: 6a0496db023843a4e9ceb73ba169cf20
+      internalID: -468922030
       vertices: []
       indices: 
       edges: []
@@ -281,14 +281,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":300.0,"y":300.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":298.0,"y":300.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       puzzle_0: -681514828
       puzzle_1: 547820816
       puzzle_2: -1230329207
-      puzzle_3: -1489692580
-      puzzle_4: 413031293
-      puzzle_5: -1226136173
+      puzzle_3: 1749220282
+      puzzle_4: 1714011417
+      puzzle_5: -468922030
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

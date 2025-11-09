@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 3
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,10 +139,10 @@ TextureImporter:
       name: buttons_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 68
-        width: 419
-        height: 164
+        x: 10
+        y: 26
+        width: 153
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,10 +161,10 @@ TextureImporter:
       name: buttons_1
       rect:
         serializedVersion: 2
-        x: 469
-        y: 15
-        width: 529
-        height: 258
+        x: 174
+        y: 7
+        width: 191
+        height: 91
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +183,10 @@ TextureImporter:
       name: buttons_2
       rect:
         serializedVersion: 2
-        x: 1055
-        y: 27
-        width: 302
-        height: 247
+        x: 387
+        y: 11
+        width: 109
+        height: 89
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: buttons_3
       rect:
         serializedVersion: 2
-        x: 1391
-        y: 18
-        width: 773
-        height: 261
+        x: 511
+        y: 8
+        width: 282
+        height: 94
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,10 +227,10 @@ TextureImporter:
       name: buttons_4
       rect:
         serializedVersion: 2
-        x: 2208
-        y: 25
-        width: 259
-        height: 258
+        x: 809
+        y: 9
+        width: 95
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,10 +249,10 @@ TextureImporter:
       name: buttons_5
       rect:
         serializedVersion: 2
-        x: 2519
-        y: 18
-        width: 256
-        height: 256
+        x: 923
+        y: 7
+        width: 94
+        height: 94
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
