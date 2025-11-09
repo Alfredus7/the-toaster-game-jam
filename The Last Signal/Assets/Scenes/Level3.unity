@@ -9384,6 +9384,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1013379412422816364, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
+      propertyPath: currentDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c5d956007d98154c8a7422bb5958f23, type: 2}
+    - target: {fileID: 1013379412422816364, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: OnDialogueEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1980935328}
@@ -11228,6 +11232,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4566703670174673343, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
+      propertyPath: currentDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: df92fd40ebbf6094b81555d4b3097942, type: 2}
+    - target: {fileID: 4566703670174673343, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: OnDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 5
       objectReference: {fileID: 0}
@@ -13029,7 +13037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6473927873302228866, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -39.997498
+      value: -39.997437
       objectReference: {fileID: 0}
     - target: {fileID: 6571163802668226810, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_AnchorMax.y
@@ -14055,6 +14063,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8395581987090651610, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8488771116750035844, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -14081,7 +14093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8530848428880995300, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -39.997498
+      value: -39.997437
       objectReference: {fileID: 0}
     - target: {fileID: 8688280306677962055, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: dot

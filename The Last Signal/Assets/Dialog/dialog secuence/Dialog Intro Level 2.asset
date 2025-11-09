@@ -14,30 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSequence
   lines:
   - character: {fileID: 11400000, guid: 0a183ea4b7fb77a46b51313d875b10cb, type: 2}
-    text: "Ubicaci\xF3n: Asentamiento Humano \u201CVilla Marchita\u201D. Estado del
-      entorno: sin signos vitales detectados. Advertencia: radiaci\xF3n ambiental
-      en el \xC1rea."
+    text: "Ubicaci\xF3n: Asentamiento \u201CVilla Marchita\u201D. Estado del entorno:
+      sin signos vitales detectados. Advertencia: radiaci\xF3n ambiental en el \xC1rea."
   - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "(voz cansada) As\xED que\u2026 este era el asentamiento. Todo lo que queda
       son m\xE1quinas oxidadas y un Sitio Vac\xEDo. Ni rastro de vida\u2026 solo
       silencio."
   - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
-    text: "(mira los restos del lugar) Parece que aqu\xED hubo una pelea\u2026maquinas
-      combate, chasis destrozados y escombros. Un asedio."
+    text: "Pareciese que aqu\xED hubo una pelea\u2026maquinas combate y escombros. "
   - character: {fileID: 11400000, guid: 0a183ea4b7fb77a46b51313d875b10cb, type: 2}
-    text: "Detectando se\xF1al de audio fragmentada del Area"
+    text: "Se\xF1al residual detectada en la red del area"
   - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
-    text: "(por la radio, entre est\xE1tica) \u2014Pa\u2026 si est\xE1s escu\u2026
-      no te acerq\u2026 (ruido fuerte) \u2026ata\u2026Enem\u2026No\u2026  (la se\xF1al
-      se corta abruptamente)."
-  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
-    text: "\xA1rayo! se perdio se\xF1al...  (miras el area) Debo recuperar esa se\xF1al
-      antes de que el canal muera por completo."
-  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
-    text: "A ver\u2026 el Generador Compacto parece que se apago, pero\r\nEl Terminal
-      Principal de Computadora bloquea el acceso"
-  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
-    text: "As\xED que tengo que restaurar energ\xEDa,hackear el terminal y arreglar
-      fusible activar  la torre y la antena."
-  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
-    text: "Todo esto antes que este Aire toxico me mate \u2026 un sistema a la vez."
+    text: "(entre est\xE1tica) si est\xE1s escu\u2026 no te acerq\u2026 (ruido fuerte)
+      \u2026ata \u2026  (la se\xF1al se corta abruptamente)."
+  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+    text: "\xA1rayos! se perdi\xF3 la se\xF1al... Debo recuperar esa se\xF1al antes
+      de que la radiaci\xF3n aumente"
+  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+    text: "A ver\u2026 el Generador Compacto parece que se apag\xF3, pero\r\nUna
+      secci\xF3n esta bloqueada "
+  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+    text: "As\xED que tengo que restaurar energ\xEDa, hackear el terminal, arreglar
+      el fusible, activar la torre y la antena."

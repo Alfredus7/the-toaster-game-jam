@@ -986,6 +986,10 @@ PrefabInstance:
       value: 0.49019608
       objectReference: {fileID: 0}
     - target: {fileID: 5177916668867592007, guid: e967b4b4e25ea4949b529402ce8f8b55, type: 3}
+      propertyPath: currentDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b397830c62b64e449c9b3a42a5bb853, type: 2}
+    - target: {fileID: 5177916668867592007, guid: e967b4b4e25ea4949b529402ce8f8b55, type: 3}
       propertyPath: OnDialogueEnd.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
