@@ -23,16 +23,16 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
     text: "(Interferencia est\xE1tica)  \r\n\xBFHola?... \xBFHay alguien?... (la
       se\xF1al se corta abruptamente)\r\n"
-  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "\xBFHola? rayos se perdi\xF3 la se\xF1al"
-  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "Debe ser la red del \xE1rea... el ancho de banda est\xE1 degradado."
-  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "A ver...  \r\nEl generador no arranca, el fusible principal est\xE1 fundido, 
       \r\ny la antena direccional se vino abajo.  "
-  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "Todo el sistema est\xE1 fuera de l\xEDnea.  \r\nSi logro restaurar la
       red del \xE1rea,  \r\nConseguir\xE9 una comunicaci\xF3n limpia."
-  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "(suspira)   El orden de reparaci\xF3n ser\xE1 Generador, fusible, antena.  
       No es la primera vez que reanimo una red ca\xEDda. "

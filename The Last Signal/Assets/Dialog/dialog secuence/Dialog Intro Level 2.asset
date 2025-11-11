@@ -27,12 +27,12 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
     text: "(entre est\xE1tica) si est\xE1s escu\u2026 no te acerq\u2026 (ruido fuerte)
       \u2026ata \u2026  (la se\xF1al se corta abruptamente)."
-  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "\xA1rayos! se perdi\xF3 la se\xF1al... Debo recuperar esa se\xF1al antes
       de que la radiaci\xF3n aumente"
-  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "A ver\u2026 el Generador Compacto parece que se apag\xF3, pero\r\nUna
       secci\xF3n esta bloqueada "
-  - character: {fileID: 11400000, guid: 8aa2fa9052f375d4ca8a076ac9ce5ec3, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "As\xED que tengo que restaurar energ\xEDa, hackear el terminal, arreglar
       el fusible, activar la torre y la antena."
