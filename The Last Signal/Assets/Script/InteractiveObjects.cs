@@ -11,14 +11,18 @@ public class InteractiveObject : MonoBehaviour
     public UnityEvent OnInteract;
 
     [Header("Configuración Reactivación")]
-   private float reactivationTime = 10f;
+    [SerializeField] private float reactivationTime = 10f;
 
     private Renderer rend;
     private MaterialPropertyBlock propBlock;
     private Color originalColor;
     private bool isPlayerInside = false;
-    private InteractionIndicator indicator;
     public bool canInteract = true;
+    private bool isRestart;
+
+    // Referencia al manager de UI
+    private InteractionIndicator uiManager;
+    private string objectName;
 
     void Awake()
     {
@@ -29,6 +33,7 @@ public class InteractiveObject : MonoBehaviour
             Debug.LogWarning($"[InteractiveObject] No se encontró Renderer en {name} ni en sus padres.");
             return;
         }
+
         propBlock = new MaterialPropertyBlock();
         rend.GetPropertyBlock(propBlock);
 
@@ -36,8 +41,9 @@ public class InteractiveObject : MonoBehaviour
             ? rend.sharedMaterial.GetColor("_OutlineColor")
             : Color.white;
 
-        // Buscar el indicador
-        indicator = GetComponentInChildren<InteractionIndicator>();
+        // Buscar el UI Manager
+        uiManager = FindObjectOfType<InteractionIndicator>();
+        objectName = gameObject.name;
     }
 
     void OnTriggerEnter(Collider other)
@@ -48,13 +54,14 @@ public class InteractiveObject : MonoBehaviour
             if (canInteract)
             {
                 SetOutlineColor(highlightColor);
-                indicator.ShowIndicator();
+                if (uiManager != null)
+                    uiManager.ShowInteractionPrompt();
             }
-            else 
+            else
             {
-                if (isRestart)
+                if (isRestart && uiManager != null)
                 {
-                    indicator.ShowCooldown();
+                    uiManager.ShowCooldown(objectName, reactivationTime);
                 }
             }
             other.SendMessage("SetInteractable", this, SendMessageOptions.DontRequireReceiver);
@@ -67,8 +74,9 @@ public class InteractiveObject : MonoBehaviour
         {
             isPlayerInside = false;
             SetOutlineColor(originalColor);
-            if (indicator != null)
-                indicator.HideIndicator();
+            if (uiManager != null)
+                uiManager.HideInteractionPrompt();
+            other.SendMessage("ClearInteractable", this, SendMessageOptions.DontRequireReceiver);
         }
     }
 
@@ -79,10 +87,11 @@ public class InteractiveObject : MonoBehaviour
         // Ejecutar el evento
         canInteract = false;
         SetOutlineColor(originalColor);
-        indicator.HideIndicator();
+        if (uiManager != null)
+            uiManager.HideInteractionPrompt();
         OnInteract?.Invoke();
     }
-    bool isRestart;
+
     public void ReactivateObject()
     {
         isRestart = true;
@@ -94,18 +103,19 @@ public class InteractiveObject : MonoBehaviour
         float timer = reactivationTime;
 
         // Mostrar cooldown inicial
-        if (indicator != null && isPlayerInside)
-            indicator.ShowCooldown();
+        if (uiManager != null && isPlayerInside)
+            uiManager.ShowCooldown(objectName, timer);
 
         // Actualizar cooldown en tiempo real
         while (timer > 0)
         {
-            if (indicator != null && isPlayerInside)
-                indicator.CooldownDisplay(timer);
+            if (uiManager != null && isPlayerInside)
+                uiManager.UpdateCooldown(timer);
 
             timer -= Time.deltaTime;
             yield return null;
         }
+
         isRestart = false;
         // Reactivar objeto
         canInteract = true;
@@ -115,8 +125,8 @@ public class InteractiveObject : MonoBehaviour
         if (isPlayerInside)
         {
             SetOutlineColor(highlightColor);
-            if (indicator != null)
-                indicator.ShowIndicator();
+            if (uiManager != null)
+                uiManager.ShowInteractionPrompt();
         }
     }
 
@@ -124,7 +134,6 @@ public class InteractiveObject : MonoBehaviour
     {
         this.canInteract = canInteract;
     }
-
 
     private void SetOutlineColor(Color color)
     {

@@ -78,11 +78,16 @@ public class TimerManager : MonoBehaviour
     public void PlayTimer()
     {
         isRunning = true;
-
+        Time.timeScale = 1f;
         // Activar movimiento del jugador
         if (GamePlayerManager.Instance != null)
             GamePlayerManager.Instance.SetPlayerCanMove(true);
 
         UpdateUI(); // Actualizar UI para cambiar color
+    }
+
+    public void PauseTimer() 
+    { 
+        Time.timeScale = 0f;
     }
 }

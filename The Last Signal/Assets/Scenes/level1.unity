@@ -5353,7 +5353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6473927873302228866, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -39.999023
+      value: -39.999084
       objectReference: {fileID: 0}
     - target: {fileID: 6473927873302228866, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5685,7 +5685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8530848428880995300, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -39.999023
+      value: -39.999084
       objectReference: {fileID: 0}
     - target: {fileID: 8530848428880995300, guid: 6cf2df0872fed124ca74e0f9200b9993, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5993,7 +5993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7294744902838864173, guid: 5d2053c7811b85c41aee020560a030c0, type: 3}
       propertyPath: m_Name
-      value: generador
+      value: generador portatil
       objectReference: {fileID: 0}
     - target: {fileID: 8741874004474320271, guid: 5d2053c7811b85c41aee020560a030c0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6026,10 +6026,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7539893616756171056, guid: 5d2053c7811b85c41aee020560a030c0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d2053c7811b85c41aee020560a030c0, type: 3}
 --- !u!1001 &5529437960323641283
 PrefabInstance:
@@ -6262,10 +6259,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1971552971929536149, guid: f4b079a67ea01bd4daccf3f88194ff92, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b079a67ea01bd4daccf3f88194ff92, type: 3}
 --- !u!114 &6984101434796467337 stripped
 MonoBehaviour:
@@ -6340,7 +6334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3784412070483281886, guid: 1c6495f733672c24e865b707fb2859ad, type: 3}
       propertyPath: m_Name
-      value: fusible
+      value: Caja de fusible
       objectReference: {fileID: 0}
     - target: {fileID: 5564318162919747150, guid: 1c6495f733672c24e865b707fb2859ad, type: 3}
       propertyPath: puzzleUI
@@ -6421,10 +6415,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2209302570960067165, guid: 1c6495f733672c24e865b707fb2859ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c6495f733672c24e865b707fb2859ad, type: 3}
 --- !u!1001 &9004422145577432268
 PrefabInstance:

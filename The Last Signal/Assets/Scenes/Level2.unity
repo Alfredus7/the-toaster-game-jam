@@ -554,10 +554,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1971552971929536149, guid: f4b079a67ea01bd4daccf3f88194ff92, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b079a67ea01bd4daccf3f88194ff92, type: 3}
 --- !u!1001 &183860464
 PrefabInstance:
@@ -2498,7 +2495,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 56dac58765fcc344bac99b60fc843cee, type: 2}
     - target: {fileID: 7294744902838864173, guid: 5d2053c7811b85c41aee020560a030c0, type: 3}
       propertyPath: m_Name
-      value: generador
+      value: generador portatil
       objectReference: {fileID: 0}
     - target: {fileID: 8741874004474320271, guid: 5d2053c7811b85c41aee020560a030c0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2507,10 +2504,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7539893616756171056, guid: 5d2053c7811b85c41aee020560a030c0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d2053c7811b85c41aee020560a030c0, type: 3}
 --- !u!114 &652324291 stripped
 MonoBehaviour:
@@ -4156,7 +4150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3784412070483281886, guid: 1c6495f733672c24e865b707fb2859ad, type: 3}
       propertyPath: m_Name
-      value: fusible
+      value: Panel de Energia
       objectReference: {fileID: 0}
     - target: {fileID: 5564318162919747150, guid: 1c6495f733672c24e865b707fb2859ad, type: 3}
       propertyPath: puzzleUI
@@ -4285,10 +4279,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2209302570960067165, guid: 1c6495f733672c24e865b707fb2859ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c6495f733672c24e865b707fb2859ad, type: 3}
 --- !u!1001 &1039015754
 PrefabInstance:
@@ -4593,6 +4584,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  reactivationTime: 10
   canInteract: 0
 --- !u!135 &1082629086
 SphereCollider:
@@ -6787,9 +6779,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1844440702107839082, guid: 112d1ea3aedcba443a428de419a7d3f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1082629085}
-    - targetCorrespondingSourceObject: {fileID: 5848499746604749462, guid: 112d1ea3aedcba443a428de419a7d3f5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 112d1ea3aedcba443a428de419a7d3f5, type: 3}
 --- !u!1001 &2401269289584028147
 PrefabInstance:
@@ -6847,6 +6836,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6564164717653021782, guid: 76bd9424aa3dd1e4fa4c389076873e23, type: 3}
+      propertyPath: m_Name
+      value: terminal
+      objectReference: {fileID: 0}
     - target: {fileID: 8479509343875753813, guid: 76bd9424aa3dd1e4fa4c389076873e23, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.28964168
@@ -6874,10 +6867,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7232554014855173098, guid: 76bd9424aa3dd1e4fa4c389076873e23, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76bd9424aa3dd1e4fa4c389076873e23, type: 3}
 --- !u!1001 &3075749823480710570
 PrefabInstance:

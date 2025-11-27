@@ -4,6 +4,12 @@ using UnityEngine.InputSystem;
 public class PlayerInteractor : MonoBehaviour
 {
     public InteractiveObject currentObject;
+    private InteractionIndicator uiManager;
+
+    void Start()
+    {
+        uiManager = FindObjectOfType<InteractionIndicator>();
+    }
 
     // 🔹 Llamado automáticamente por el objeto interactuable (SendMessage)
     public void SetInteractable(InteractiveObject obj)
@@ -19,10 +25,22 @@ public class PlayerInteractor : MonoBehaviour
             Interact();
         }
     }
-    //event externo button UI
+
+    // Evento externo button UI
     public void Interact()
     {
         if (!currentObject) return;
         currentObject.Interact();
+    }
+
+    // Para limpiar la referencia cuando el jugador se aleja
+    public void ClearInteractable(InteractiveObject obj)
+    {
+        if (currentObject == obj)
+        {
+            currentObject = null;
+            if (uiManager != null)
+                uiManager.HideInteractionPrompt();
+        }
     }
 }
