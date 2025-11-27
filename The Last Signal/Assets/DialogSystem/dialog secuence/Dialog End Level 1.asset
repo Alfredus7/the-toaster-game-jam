@@ -33,6 +33,6 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "(respira hondo, concentrado)  \r\nSi hay supervivientes, es probable que
       \r\nmi hija Sof\xEDa\u2026 podr\xEDa estar en ese lugar."
-  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
+  - character: {fileID: 11400000, guid: 0a183ea4b7fb77a46b51313d875b10cb, type: 2}
     text: "Ubicaci\xF3n de destino marcada en el mapa: Asentamiento supervivientes
       Villa Marchita."

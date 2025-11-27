@@ -39,19 +39,15 @@ public class TimerManager : MonoBehaviour
 
     void UpdateUI()
     {
-        if (!isRunning)
-        {
-            timerText.color = pausedColor;
-        }
-        else
-        {
-            // Tiempo corriendo en color blanco
-            timerText.color = runningColor;
-        }
+        timerText.color = isRunning ? runningColor : pausedColor;
+
         int minutes = Mathf.FloorToInt(timeRemaining / 60f);
         int seconds = Mathf.FloorToInt(timeRemaining % 60f);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        // Sin boxing
+        timerText.text = $"{minutes:00}:{seconds:00}";
     }
+
 
     // Método para iniciar el temporizador
     public void StartTimer()

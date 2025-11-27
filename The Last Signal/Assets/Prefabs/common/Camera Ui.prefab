@@ -6885,9 +6885,10 @@ PrefabInstance:
     - {fileID: 8500218980720010946, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
     - {fileID: 4879888500219264114, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
     - {fileID: 2919617564367748440, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
+    - {fileID: 5617172463336728024, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4125765458467455707, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
-      insertIndex: 7
+      insertIndex: 6
       addedObject: {fileID: 9116926945152121040}
     - targetCorrespondingSourceObject: {fileID: 2822537736124290036, guid: 0ea9f5bbf59a79247a313eb2acf7ffec, type: 3}
       insertIndex: -1
@@ -7130,9 +7131,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3100861038357347210}
     - target: {fileID: 1950114211746934760, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950114211746934760, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
+    - target: {fileID: 1950114211746934760, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950114211746934760, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950114211746934760, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950114211746934760, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2560252828571204662, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: onMaxFailsReached.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7142,9 +7163,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3100861038357347210}
     - target: {fileID: 4295062262633353136, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295062262633353136, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
+    - target: {fileID: 4295062262633353136, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295062262633353136, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295062262633353136, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295062262633353136, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5653610530782199784, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: onMaxFailsReached.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7154,9 +7195,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3100861038357347210}
     - target: {fileID: 5972986741471965054, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972986741471965054, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
+    - target: {fileID: 5972986741471965054, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972986741471965054, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972986741471965054, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972986741471965054, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6309336969699978520, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: m_Name
       value: Puzzles3
@@ -7166,9 +7227,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3100861038357347210}
     - target: {fileID: 6550878322620637961, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550878322620637961, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
+    - target: {fileID: 6550878322620637961, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550878322620637961, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550878322620637961, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550878322620637961, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6646154050717168038, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: onMaxFailsReached.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7258,21 +7339,85 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3100861038357347210}
     - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
     - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308657704750880018, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7315860323194310252, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
     - target: {fileID: 7315860323194310252, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315860323194310252, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
+    - target: {fileID: 7315860323194310252, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315860323194310252, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315860323194310252, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315860323194310252, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7670656153327303840, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: onMaxFailsReached.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7282,9 +7427,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3100861038357347210}
     - target: {fileID: 8566482250456050742, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566482250456050742, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
       propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3100861038357347210}
+    - target: {fileID: 8566482250456050742, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566482250456050742, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566482250456050742, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566482250456050742, guid: b6f01a26187e3d94c9aa16b6cc889b7b, type: 3}
+      propertyPath: OnPuzzleStart.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

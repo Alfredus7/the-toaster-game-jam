@@ -68,7 +68,6 @@ Shader "UI/RetroScreen"
             float4 _ClipRect;
             float4 _MainTex_ST;
 
-            // --- Función hash simple para flicker pseudoaleatorio
             float hash(float n)
             {
                 return frac(sin(n) * 43758.5453);
@@ -92,19 +91,17 @@ Shader "UI/RetroScreen"
                 half4 finalColor = tex2D(_MainTex, uv);
                 finalColor = (finalColor + _TextureSampleAdd) * IN.color;
 
-                // --- Líneas de escaneo
+                // --- Líneas de escaneo adaptadas a pantalla y landscape
                 float2 screenUV = IN.vertex.xy / _ScreenParams.xy;
-                float scan = frac(screenUV.y * _ScanDensity + _Time.y * _ScanSpeed);
+                float aspect = _ScreenParams.x / _ScreenParams.y;
+                float scanCoord = screenUV.y; // vertical scanlines
+                float scan = frac(scanCoord * _ScanDensity + _Time.y * _ScanSpeed);
                 scan = 1.0 - abs(scan * 2.0 - 1.0);
                 scan = scan * scan;
                 float scanMultiplier = 0.7 + scan * 0.3;
 
-                // --- Flicker pseudoaleatorio basado en tiempo
-                float flicker = hash(floor(_Time.y * 60.0)); // cambia ~60 veces por segundo
-                float flickerFactor = 1.0 + (flicker - 0.5) * 2.0 * _FlickerIntensity;
-
                 // --- Aplicar brillo total
-                finalColor.rgb *= scanMultiplier * _GlowIntensity * flickerFactor;
+                finalColor.rgb *= scanMultiplier * _GlowIntensity;
 
                 #ifdef UNITY_UI_CLIP_RECT
                 finalColor.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);

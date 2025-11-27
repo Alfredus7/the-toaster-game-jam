@@ -22,7 +22,7 @@ public class GameSettingsManager : MonoBehaviour
     {
         // Instancia única por escena, sin persistencia
         Instance = this;
-        
+
         if (postProcessVolume != null && postProcessVolume.profile != null)
         {
             postProcessVolume.profile.TryGet(out bloom);
@@ -35,7 +35,7 @@ public class GameSettingsManager : MonoBehaviour
             Debug.Log("[GameSettingsManager] No hay Volume asignado en esta escena — módulo gráfico inactivo.");
         }
 
-        
+
     }
     private void Start()
     {
@@ -104,12 +104,12 @@ public class GameSettingsManager : MonoBehaviour
         SetMasterVolume(master);
         SetMusicVolume(music);
         SetSFXVolume(sfx);
-     
+
 
         bool bloomOn = PlayerPrefs.GetInt("Bloom", 1) == 1;
-        bool vignOn = PlayerPrefs.GetInt("Vintage", 0) == 1;
-        bool filmOn = PlayerPrefs.GetInt("FilmGrain", 0) == 1;
-        float expo = PlayerPrefs.GetFloat("Exposure", 1f);
+        bool vignOn = PlayerPrefs.GetInt("Vintage", 1) == 1;
+        bool filmOn = PlayerPrefs.GetInt("FilmGrain", 1) == 1;
+        float expo = PlayerPrefs.GetFloat("Exposure", 0f);
 
         SetBloom(bloomOn);
         SetVintage(vignOn);

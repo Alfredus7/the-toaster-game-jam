@@ -43,7 +43,4 @@ MonoBehaviour:
     text: "Despu\xE9s, reemplazar el fusible principal del b\xFAnker,\nreiniciar
       los servidores,\ny finalmente acceder a la computadora del administrador."
   - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
-    text: "Despu\xE9s, reemplazar el fusible principal del b\xFAnker,\nreiniciar
-      los servidores,\ny finalmente acceder a la computadora del administrador."
-  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "Tendr\xE9 que apresurarme antes que la temperatura siga bajando."

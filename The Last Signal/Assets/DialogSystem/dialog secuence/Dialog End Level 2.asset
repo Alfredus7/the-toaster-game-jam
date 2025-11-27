@@ -25,7 +25,7 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 039f7ea10be1c034891c78d336b0051a, type: 2}
     text: "Advertencia: nueva se\xF1al detectada en el per\xEDmetro.\r\nOrigen: Unidad
       de Combate URQ-027."
-  - character: {fileID: 11400000, guid: 0a183ea4b7fb77a46b51313d875b10cb, type: 2}
+  - character: {fileID: 11400000, guid: 9f1001abb7e4a5a489b0b32a62dbf20b, type: 2}
     text: "\xBFURQ-027?\r\nun modelo de combate militar.\r\nDebi\xF3 reactivarse
       con la energ\xEDa."
   - character: {fileID: 11400000, guid: 3e9cab8e244cb64418dba0a9badcab27, type: 2}

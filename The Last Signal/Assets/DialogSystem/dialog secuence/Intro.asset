@@ -47,6 +47,6 @@ MonoBehaviour:
       que pueda ayudarme a encontrar a mi hija.
 
 '
-  - character: {fileID: 11400000, guid: 0a183ea4b7fb77a46b51313d875b10cb, type: 2}
+  - character: {fileID: 11400000, guid: 039f7ea10be1c034891c78d336b0051a, type: 2}
     text: "Advertencia: niebla t\xF3xica acerc\xE1ndose al \xE1rea.\r\nEl usuario
       deber\xEDa apresurar sus pasos hacia la base Echo-Net.\r\n"

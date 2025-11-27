@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a5941f1da4390fd4fa996db3080a8154, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -114,7 +114,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FlickerIntensity: 0
+    - _FlickerIntensity: 0.121
     - _FlickerSpeed: 20
     - _GlitchIntensity: 0.0756
     - _GlitchLevel: 0
@@ -133,6 +133,7 @@ Material:
     - _RGBShift: 0
     - _ReceiveShadows: 1
     - _ScanDensity: 30
+    - _ScanDirection: 1
     - _ScanSpeed: 5
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0

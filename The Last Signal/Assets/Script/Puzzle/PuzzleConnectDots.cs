@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PuzzleConnectDots : MonoBehaviour
 {
+    #region // ===================== Variables =====================
+
     [Header("Configuración")]
     [SerializeField] private Transform gridParent;
     [SerializeField] private TextMeshProUGUI messageText;
@@ -17,33 +19,45 @@ public class PuzzleConnectDots : MonoBehaviour
     public UnityEvent OnPuzzleStart, OnPuzzleStartDraw, OnPuzzleFail, OnPuzzleConectNode, OnPuzzleEnd;
 
     private List<Cell> cells = new List<Cell>();
-    private bool isDrawing, isLocked;
+    private bool isDrawing = false;
+    private bool isLocked = false;
     private Cell startCell;
     private Color currentColor;
+
     private Dictionary<Color, List<Cell>> paths = new Dictionary<Color, List<Cell>>();
     private Dictionary<Color, bool> completedPaths = new Dictionary<Color, bool>();
+
     private Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
     private float neighborThreshold = 1.2f;
 
-    // Para el typewriter
+    // Para typewriter
     private bool isTypingMessage = false;
     private Coroutine typingCoroutine;
     private float messageTypingSpeed = 0.03f;
 
-    // Nuevo: Control de mensajes
+    // Mensajes temporales
     private bool showingTemporaryMessage = false;
     private string defaultMessage = "Conecta los nodos para reparar el circuito";
+
+    #endregion
+
+    #region // ===================== Inicialización =====================
 
     private void OnEnable() => InitializePuzzle();
 
     private void InitializePuzzle()
     {
         cells = gridParent?.Cast<Transform>()
-                       .Select(t => t.GetComponent<Cell>())
-                       .Where(c => c != null).ToList() ?? cells;
+                   .Select(t => t.GetComponent<Cell>())
+                   .Where(c => c != null).ToList() ?? cells;
+
         ClearMessage();
         ApplySpritesToCells();
         cells.ForEach(cell => cell.Init(this, InBlankColor));
+
+        // Restaurar visualmente los paths existentes
+        RestorePathsVisuals();
+
         OnPuzzleStart?.Invoke();
     }
 
@@ -65,10 +79,13 @@ public class PuzzleConnectDots : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region // ===================== Dibujar Paths =====================
+
     public void StartDrawing(Cell cell)
     {
-        // VERIFICACIÓN CORREGIDA: Si el puzzle está bloqueado o ya hay un path completado para este color
-        if (isLocked || !isDrawing && completedPaths.ContainsKey(cell.GetDotColor()) && completedPaths[cell.GetDotColor()])
+        if (isLocked || (!isDrawing && completedPaths.ContainsKey(cell.GetDotColor()) && completedPaths[cell.GetDotColor()]))
         {
             ShowTemporaryMessage("¡Este nodo ya está conectado!", 1.5f);
             return;
@@ -80,30 +97,26 @@ public class PuzzleConnectDots : MonoBehaviour
         currentColor = cell.GetDotColor();
         isDrawing = true;
         paths[currentColor] = new List<Cell> { cell };
+
         OnPuzzleStartDraw?.Invoke();
     }
 
     public void ContinueDrawing(Cell cell)
     {
-        // VERIFICACIÓN MEJORADA: No permitir dibujar si el path actual ya está completado
-        if (!isDrawing || !paths.ContainsKey(currentColor) || paths[currentColor].Count == 0)
-            return;
+        if (!isDrawing || !paths.ContainsKey(currentColor) || paths[currentColor].Count == 0) return;
 
-        // Verificar si este path actual YA ESTÁ COMPLETADO
         if (completedPaths.ContainsKey(currentColor) && completedPaths[currentColor])
         {
             FailPath("¡Este camino ya está completado!");
             return;
         }
 
-        // No permitir dibujar sobre otros Start (excepto el propio)
         if (cell.type == Cell.CellType.Start && cell != startCell)
         {
             FailPath("No puedes pasar por otro nodo de inicio");
             return;
         }
 
-        // NO PERMITIR SOBREESCRIBIR CELDAS QUE YA TIENEN COLOR DE OTRO PATH COMPLETADO
         if (IsCellPartOfCompletedPath(cell))
         {
             FailPath("No puedes pasar por rutas ya completadas");
@@ -112,7 +125,7 @@ public class PuzzleConnectDots : MonoBehaviour
 
         if (paths[currentColor].Contains(cell)) return;
 
-        // Lógica para Fails (X)
+        // Lógica para Fails, End y Dot
         if (cell.type == Cell.CellType.Fails)
         {
             if (!cell.HasColor() || cell.GetDotColor() == currentColor)
@@ -121,9 +134,7 @@ public class PuzzleConnectDots : MonoBehaviour
                 return;
             }
         }
-
-        // Lógica para Ends (cuadrados vacíos)
-        if (cell.type == Cell.CellType.End)
+        else if (cell.type == Cell.CellType.End)
         {
             if (cell.HasColor() && cell.GetDotColor() != currentColor)
             {
@@ -131,9 +142,7 @@ public class PuzzleConnectDots : MonoBehaviour
                 return;
             }
         }
-
-        // Lógica para Dots (puntos)
-        if (cell.type == Cell.CellType.Dot)
+        else if (cell.type == Cell.CellType.Dot)
         {
             if (cell.HasColor() && cell.GetDotColor() != currentColor)
             {
@@ -145,7 +154,6 @@ public class PuzzleConnectDots : MonoBehaviour
         Cell lastCell = paths[currentColor].Last();
         if (!IsValidNeighbor(lastCell, cell)) return;
 
-        // Si es End, completar la ruta
         if (cell.type == Cell.CellType.End)
         {
             paths[currentColor].Add(cell);
@@ -154,10 +162,8 @@ public class PuzzleConnectDots : MonoBehaviour
             return;
         }
 
-        // Para Dots y Empty, continuar dibujando SOLO si no tienen color o tienen el mismo color
         if (cell.type == Cell.CellType.Dot || cell.type == Cell.CellType.Empty)
         {
-            // Verificar nuevamente que no sea parte de un path completado
             if (!IsCellPartOfCompletedPath(cell) && (!cell.HasColor() || cell.GetDotColor() == currentColor))
             {
                 cell.SetColor(currentColor);
@@ -173,12 +179,32 @@ public class PuzzleConnectDots : MonoBehaviour
         paths[currentColor].Add(cell);
     }
 
-    // NUEVO MÉTODO: Verificar si la celda es parte de un path COMPLETADO
+    public void EndDrawing(Cell cell)
+    {
+        if (!isDrawing || !paths.ContainsKey(currentColor) || paths[currentColor].Count <= 1)
+        {
+            if (isDrawing) FailPath("Ruta demasiado corta");
+            return;
+        }
+
+        if (paths[currentColor].Last().type == Cell.CellType.End)
+        {
+            completedPaths[currentColor] = true;
+            isDrawing = false;
+
+            CheckPuzzleProgress();
+        }
+        else
+        {
+            FailPath("Ruta inválida. Reiniciando...");
+        }
+    }
+
     private bool IsCellPartOfCompletedPath(Cell cell)
     {
         foreach (var completedPath in completedPaths)
         {
-            if (completedPath.Value && // El path está completado
+            if (completedPath.Value &&
                 paths.ContainsKey(completedPath.Key) &&
                 paths[completedPath.Key].Contains(cell))
             {
@@ -188,141 +214,29 @@ public class PuzzleConnectDots : MonoBehaviour
         return false;
     }
 
-    // MÉTODO ACTUALIZADO: Verificar si la celda ya está coloreada por otro path
-    private bool IsCellAlreadyColoredByOtherPath(Cell cell)
-    {
-        // Si la celda no tiene color, no está ocupada
-        if (!cell.HasColor()) return false;
-
-        // Si la celda tiene el mismo color que el path actual, no está ocupada por otro
-        if (cell.GetDotColor() == currentColor) return false;
-
-        // Si la celda está en el path actual, no está ocupada por otro
-        if (paths.ContainsKey(currentColor) && paths[currentColor].Contains(cell)) return false;
-
-        // Si la celda es parte de un path COMPLETADO, está ocupada
-        if (IsCellPartOfCompletedPath(cell)) return true;
-
-        // Para celdas Empty y Dot: si tienen color diferente al actual, están ocupadas
-        if ((cell.type == Cell.CellType.Empty || cell.type == Cell.CellType.Dot) &&
-            cell.HasColor() && cell.GetDotColor() != currentColor)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public void EndDrawing(Cell cell)
-    {
-        // Verificar que hay al menos una celda en el path antes de terminar
-        if (!isDrawing || !paths.ContainsKey(currentColor) || paths[currentColor].Count <= 1)
-        {
-            if (isDrawing)
-            {
-                FailPath("Ruta demasiado corta");
-            }
-            return;
-        }
-
-        if (paths[currentColor].Last().type == Cell.CellType.End)
-        {
-            // Marcar este path como completado
-            completedPaths[currentColor] = true;
-            isDrawing = false;
-
-            // PRIMERO verificar el progreso general antes de mostrar cualquier mensaje
-            CheckPuzzleProgress();
-        }
-        else
-        {
-            FailPath("Ruta inválida. Reiniciando...");
-        }
-    }
-
-    private void FailPath(string msg)
-    {
-        if (isLocked) return;
-        isLocked = true;
-        isDrawing = false;
-        ShowTemporaryMessage(msg, 1.5f);
-        OnPuzzleFail?.Invoke();
-
-        // Resetear todo el puzzle después de un delay
-        Invoke(nameof(ResetPuzzle), 0.5f);
-    }
-
-    private void ResetPuzzle()
-    {
-        cells.ForEach(c => c.ResetColor());
-        ApplySpritesToCells();
-        paths.Clear();
-        completedPaths.Clear();
-        isDrawing = false;
-        isLocked = false;
-    }
-
-    //// NUEVO MÉTODO: Resetear solo el path actual en lugar de todo el puzzle
-    //private void ResetCurrentPath()
-    //{
-    //    if (paths.ContainsKey(currentColor))
-    //    {
-    //        // Remover el color solo de las celdas que pertenecen a este path y no están en paths completados
-    //        foreach (var cell in paths[currentColor])
-    //        {
-    //            if (!IsCellPartOfCompletedPath(cell) && cell != startCell)
-    //            {
-    //                cell.ResetColor();
-    //                // Restaurar sprite original basado en el tipo de celda
-    //                Image img = cell.GetComponent<Image>();
-    //                if (img != null)
-    //                {
-    //                    img.sprite = cell.type switch
-    //                    {
-    //                        Cell.CellType.Dot => dot,
-    //                        Cell.CellType.Empty => empty,
-    //                        _ => img.sprite
-    //                    };
-    //                }
-    //            }
-    //        }
-    //        paths.Remove(currentColor);
-    //    }
-    //}
-
-    //private void UnlockPuzzle()
-    //{
-    //    isLocked = false;
-    //}
-
-    //private void ResetPuzzle()
-    //{
-    //    cells.ForEach(c => c.ResetColor());
-    //    ApplySpritesToCells();
-    //    paths.Clear();
-    //    completedPaths.Clear();
-    //    isDrawing = false;
-    //}
-
     private bool IsValidNeighbor(Cell a, Cell b)
     {
         RectTransform ra = a.GetComponent<RectTransform>();
         RectTransform rb = b.GetComponent<RectTransform>();
         float cellSize = Mathf.Max(ra.sizeDelta.x, ra.sizeDelta.y) * neighborThreshold;
 
-        return directions.Any(dir =>
-            Vector2.Distance(rb.anchoredPosition, ra.anchoredPosition + dir * cellSize) < cellSize * 0.7f);
+        foreach (var dir in directions)
+        {
+            float dist = Vector2.Distance(rb.anchoredPosition, ra.anchoredPosition + dir * cellSize);
+            if (dist < cellSize * 0.7f) return true;
+        }
+        return false;
     }
+
+    #endregion
+
+    #region // ===================== Estado del puzzle =====================
 
     private void CheckPuzzleProgress()
     {
         bool allSourcesConnected = cells
             .Where(c => c.type == Cell.CellType.Start)
-            .All(start =>
-            {
-                Color startColor = start.GetDotColor();
-                return completedPaths.ContainsKey(startColor) && completedPaths[startColor];
-            });
+            .All(start => completedPaths.ContainsKey(start.GetDotColor()) && completedPaths[start.GetDotColor()]);
 
         if (!allSourcesConnected)
         {
@@ -336,14 +250,9 @@ public class PuzzleConnectDots : MonoBehaviour
             .All(dot =>
             {
                 if (!dot.HasColor())
-                {
                     return paths.Values.Any(p => p.Contains(dot));
-                }
                 else
-                {
-                    return paths.ContainsKey(dot.GetDotColor()) &&
-                           paths[dot.GetDotColor()].Contains(dot);
-                }
+                    return paths.ContainsKey(dot.GetDotColor()) && paths[dot.GetDotColor()].Contains(dot);
             });
 
         if (!allDotsConnected)
@@ -369,18 +278,37 @@ public class PuzzleConnectDots : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // Nuevo método para mensajes temporales
+    private void FailPath(string msg)
+    {
+        if (isLocked) return;
+        isLocked = true;
+        isDrawing = false;
+        ShowTemporaryMessage(msg, 1.5f);
+        OnPuzzleFail?.Invoke();
+        Invoke(nameof(ResetPuzzle), 0.5f);
+    }
+
+    private void ResetPuzzle()
+    {
+        cells.ForEach(c => c.ResetColor());
+        ApplySpritesToCells();
+        paths.Clear();
+        completedPaths.Clear();
+        isDrawing = false;
+        isLocked = false;
+    }
+
+    #endregion
+
+    #region // ===================== Mensajes temporales =====================
+
     private void ShowTemporaryMessage(string text, float duration)
     {
         if (messageText == null || !gameObject.activeInHierarchy) return;
 
-        // Cancelar cualquier mensaje temporal anterior
         CancelInvoke(nameof(ClearTemporaryMessage));
-
         showingTemporaryMessage = true;
         typeo(text);
-
-        // Programar volver al mensaje por defecto
         Invoke(nameof(ClearTemporaryMessage), duration);
     }
 
@@ -402,19 +330,48 @@ public class PuzzleConnectDots : MonoBehaviour
         ShowDefaultMessage();
     }
 
+    #endregion
+
+    #region // ===================== Visualización de Paths =====================
+
+    private void RestorePathsVisuals()
+    {
+        foreach (var kvp in paths)
+        {
+            Color pathColor = kvp.Key;
+            List<Cell> pathCells = kvp.Value;
+
+            foreach (var cell in pathCells)
+            {
+                if (cell.type == Cell.CellType.Start) continue;
+
+                if (cell.type == Cell.CellType.End && completedPaths.ContainsKey(pathColor) && completedPaths[pathColor])
+                {
+                    cell.SetImage(start);
+                    cell.SetColor(pathColor);
+                    continue;
+                }
+
+                cell.SetColor(pathColor);
+                cell.SetImage(path);
+            }
+        }
+    }
+
+    #endregion
+
+    #region // ===================== Utilidades =====================
+
     public void typeo(string text)
     {
-        // Check if game object is active before starting coroutine
         if (!gameObject.activeInHierarchy) return;
 
-        // Cancel typing anterior si existe
         if (typingCoroutine != null)
         {
             StopCoroutine(typingCoroutine);
             isTypingMessage = false;
         }
 
-        // Usar la utilidad de typewriter
         typingCoroutine = StartCoroutine(TypewriterUtility.TypeText(
             text,
             messageText,
@@ -425,4 +382,6 @@ public class PuzzleConnectDots : MonoBehaviour
 
     public void RefreshCells() => InitializePuzzle();
     public Color GetInBlankColor() => InBlankColor;
+
+    #endregion
 }

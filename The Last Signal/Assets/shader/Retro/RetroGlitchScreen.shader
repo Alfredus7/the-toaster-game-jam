@@ -116,9 +116,10 @@ Shader "UI/RetroGlitchedScreen"
                 fixed4 col = tex2D(_MainTex, uv);
                 col = (col + _TextureSampleAdd) * IN.color;
 
-                // --- Líneas de escaneo ---
+                // --- Líneas de escaneo adaptadas a pantalla y landscape ---
                 float2 screenUV = IN.vertex.xy / _ScreenParams.xy;
-                float scan = frac(screenUV.y * _ScanDensity + _Time.y * _ScanSpeed);
+                float scanCoord = screenUV.y; // vertical scanlines
+                float scan = frac(scanCoord * _ScanDensity + _Time.y * _ScanSpeed);
                 scan = 1.0 - abs(scan * 2.0 - 1.0);
                 scan *= scan;
                 float scanMul = 0.7 + scan * 0.3;
