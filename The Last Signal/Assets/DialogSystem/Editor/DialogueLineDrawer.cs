@@ -4,79 +4,105 @@ using UnityEditor;
 [CustomPropertyDrawer(typeof(DialogueLine))]
 public class DialogueLineDrawer : PropertyDrawer
 {
-    private const float portraitSize = 64f;
-    private const float padding = 6f;
+    private const float PortraitSize = 64f;
+    private const float Padding = 6f;
+    private const float MinTextHeight = 48f;
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        // Altura dinámica: retrato + texto
-        return portraitSize + EditorGUIUtility.singleLineHeight * 4 + padding * 4;
+        SerializedProperty textProp = property.FindPropertyRelative("text");
+        int lineCount = Mathf.Max(1, textProp.stringValue.Split('\n').Length);
+
+        float textHeight = EditorGUIUtility.singleLineHeight * lineCount + Padding * 2;
+        textHeight = Mathf.Max(textHeight, MinTextHeight);
+
+        return PortraitSize + textHeight + Padding * 4 + EditorGUIUtility.singleLineHeight * 2;
     }
 
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    public override void OnGUI(Rect pos, SerializedProperty property, GUIContent label)
     {
         SerializedProperty characterProp = property.FindPropertyRelative("character");
         SerializedProperty textProp = property.FindPropertyRelative("text");
 
-        EditorGUI.BeginProperty(position, label, property);
+        EditorGUI.BeginProperty(pos, label, property);
 
-        // Fondo ligeramente gris para separar líneas
-        GUI.Box(position, GUIContent.none);
+        // ----- Fondo general -----
+        Color bg = new Color(0.13f, 0.13f, 0.13f, 1f);
+        EditorGUI.DrawRect(pos, bg);
 
-        // Margen interior
-        position.x += padding;
-        position.width -= padding * 2;
-        position.y += padding;
+        pos.x += Padding;
+        pos.y += Padding;
+        pos.width -= Padding * 2;
 
-        // --- FILA: Portrait + Character Name ---
-        Rect portraitRect = new Rect(position.x, position.y, portraitSize, portraitSize);
-        Rect nameRect = new Rect(position.x + portraitSize + padding, position.y, position.width - portraitSize - padding, EditorGUIUtility.singleLineHeight);
+        // ----- Zona retrato + nombre -----
+        Rect portraitRect = new Rect(pos.x, pos.y, PortraitSize, PortraitSize);
+        Rect nameRect = new Rect(
+            pos.x + PortraitSize + Padding,
+            pos.y + 4,
+            pos.width - PortraitSize - Padding,
+            EditorGUIUtility.singleLineHeight
+        );
 
-        // Dibujar sprite recortado
-        Sprite sprite = GetPortrait(characterProp);
-        if (sprite != null)
-            DrawSprite(sprite, portraitRect);
-        else
-            EditorGUI.HelpBox(portraitRect, "No portrait", MessageType.None);
+        DrawCharacterPortrait(characterProp, portraitRect);
 
-        // Nombre del personaje
-        DialogueCharacter character = characterProp.objectReferenceValue as DialogueCharacter;
-        string charName = (character != null) ? character.characterName : "Sin personaje";
-        EditorGUI.LabelField(nameRect, charName, EditorStyles.boldLabel);
+        DialogueCharacter ch = characterProp.objectReferenceValue as DialogueCharacter;
+        string displayName = ch != null ? ch.characterName : "Sin personaje";
+        EditorGUI.LabelField(nameRect, displayName, EditorStyles.boldLabel);
 
-        // --- Campo: Character ---
-        Rect charFieldRect = new Rect(nameRect.x, nameRect.y + EditorGUIUtility.singleLineHeight + padding, nameRect.width, EditorGUIUtility.singleLineHeight);
+        // Selector del personaje
+        Rect charFieldRect = new Rect(
+            nameRect.x,
+            nameRect.y + EditorGUIUtility.singleLineHeight + Padding,
+            nameRect.width,
+            EditorGUIUtility.singleLineHeight
+        );
         EditorGUI.PropertyField(charFieldRect, characterProp, GUIContent.none);
 
-        // --- Campo: Texto del diálogo ---
-        Rect textRect = new Rect(position.x, position.y + portraitSize + padding * 2, position.width, EditorGUIUtility.singleLineHeight * 4);
-        EditorGUI.PropertyField(textRect, textProp);
+        // ----- Texto del diálogo -----
+        float textStartY = pos.y + PortraitSize + Padding * 2;
+        float textHeight = GetTextHeight(textProp);
+
+        Rect textRect = new Rect(pos.x, textStartY, pos.width, textHeight);
+        EditorGUI.PropertyField(textRect, textProp, new GUIContent(" ")); // sin label
 
         EditorGUI.EndProperty();
     }
 
-    private Sprite GetPortrait(SerializedProperty characterProp)
+    private float GetTextHeight(SerializedProperty textProp)
     {
-        if (characterProp.objectReferenceValue == null) return null;
-        DialogueCharacter dc = characterProp.objectReferenceValue as DialogueCharacter;
-        return dc != null ? dc.portrait : null;
+        int lineCount = Mathf.Max(1, textProp.stringValue.Split('\n').Length);
+        float height = EditorGUIUtility.singleLineHeight * lineCount + Padding * 2;
+        return Mathf.Max(height, MinTextHeight);
     }
 
-    // Dibuja correctamente solo el rect del sprite (soporta spritesheets)
-    private void DrawSprite(Sprite sprite, Rect rect)
+    private void DrawCharacterPortrait(SerializedProperty characterProp, Rect portraitRect)
     {
-        if (sprite == null) return;
+        Sprite sprite = null;
+        if (characterProp.objectReferenceValue != null)
+        {
+            DialogueCharacter dc = characterProp.objectReferenceValue as DialogueCharacter;
+            sprite = dc != null ? dc.portrait : null;
+        }
+
+        Color frameColor = new Color(0.25f, 0.25f, 0.25f);
+        EditorGUI.DrawRect(portraitRect, frameColor);
+
+        if (sprite == null)
+        {
+            EditorGUI.HelpBox(portraitRect, "No\nPortrait", MessageType.None);
+            return;
+        }
 
         Texture2D tex = sprite.texture;
-        Rect spriteRect = sprite.textureRect;
+        Rect texRect = sprite.textureRect;
 
         Rect uv = new Rect(
-            spriteRect.x / tex.width,
-            spriteRect.y / tex.height,
-            spriteRect.width / tex.width,
-            spriteRect.height / tex.height
+            texRect.x / tex.width,
+            texRect.y / tex.height,
+            texRect.width / tex.width,
+            texRect.height / tex.height
         );
 
-        GUI.DrawTextureWithTexCoords(rect, tex, uv);
+        GUI.DrawTextureWithTexCoords(portraitRect, tex, uv);
     }
 }
